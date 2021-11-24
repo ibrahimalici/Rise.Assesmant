@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  postgresql_db:
+    container_name: postgresql_db
+    restart: always
+    environment:
+     POSTGRES_USER: postgres
+     POSTGRES_PASSWORD: azx@1234
+     POSTGRES_DB: postgres
+    volumes:
+     - postgres-volume:/var/lib/postgresql/data
+    ports:
+     - "5432:5432"
+
+  apigateway:
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+     - "8000:80"
+
+  contactsapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
