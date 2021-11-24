@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using ContactsAPI.Domains;
-using ContactsAPI.Entities;
 using ContactsAPI.Persistance;
 using MediatR;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
+using ContactsAPI.Entities;
 
-namespace ContactsAPI.Application.Iletisim.Queries
+namespace ContactsAPI.Application.IletisimBilgileri.Queries
 {
     public class GetAllIletisimQuery : IRequest<List<IletisimDTO>>
     {
@@ -33,10 +33,10 @@ namespace ContactsAPI.Application.Iletisim.Queries
             List<Iletisim> data = new List<Iletisim>();
 
             if (!request.Paging)
-                data = db.Iletisim.ToList();
+                data = db.IletisimBilgileri.ToList();
             else
             {
-                db.Iletisim.Skip(request.StartIndex).Take(request.RecordCount).ToList();
+                db.IletisimBilgileri.Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 
             List<IletisimDTO> result = mapper.Map<List<IletisimDTO>>(data);

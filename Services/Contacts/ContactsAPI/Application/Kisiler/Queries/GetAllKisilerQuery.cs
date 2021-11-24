@@ -10,14 +10,14 @@ using System.Linq;
 
 namespace ContactsAPI.Application.Kisiler.Queries
 {
-    public class GetAllIletisimQuery : IRequest<List<KisiDTO>>
+    public class GetAllKisilerQuery : IRequest<List<KisiDTO>>
     {
         public bool Paging { get; set; }
         public int StartIndex { get; set; }
         public int RecordCount { get; set; }
     }
 
-    public class GetAllKisilerHandle : IRequestHandler<GetAllIletisimQuery, List<KisiDTO>>
+    public class GetAllKisilerHandle : IRequestHandler<GetAllKisilerQuery, List<KisiDTO>>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
@@ -28,7 +28,7 @@ namespace ContactsAPI.Application.Kisiler.Queries
             this.mapper = mapper;
         }
 
-        public async Task<List<KisiDTO>> Handle(GetAllIletisimQuery request, CancellationToken cancellationToken)
+        public async Task<List<KisiDTO>> Handle(GetAllKisilerQuery request, CancellationToken cancellationToken)
         {
             List<Kisi> data = new List<Kisi>();
 

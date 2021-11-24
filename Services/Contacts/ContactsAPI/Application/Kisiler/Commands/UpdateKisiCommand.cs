@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.Kisiler.Commands
 {
-    public class UpdateIletisimCommand : IRequest<bool>
+    public class UpdateKisiCommand : IRequest<bool>
     {
         public Guid Id { get; set; }
         public string Ad { get; set; }
@@ -15,7 +15,7 @@ namespace ContactsAPI.Application.Kisiler.Commands
         public string Firma { get; set; }
     }
 
-    public class UpdateKisiHandle : IRequestHandler<UpdateIletisimCommand,bool>
+    public class UpdateKisiHandle : IRequestHandler<UpdateKisiCommand, bool>
     {
         private readonly DatabaseContext db;
 
@@ -24,7 +24,7 @@ namespace ContactsAPI.Application.Kisiler.Commands
             this.db = db;
         }
 
-        public async Task<bool> Handle(UpdateIletisimCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateKisiCommand request, CancellationToken cancellationToken)
         {
             Kisi saved = await db.Kisiler.FindAsync(request.Id);
 

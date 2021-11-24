@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class KisilerController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace ContactsAPI.Controllers
         public async Task<KisiDTO> Get([FromRoute] Guid id)
         {
 
-            var result = await mediator.Send(new GetIletisimByIdQuery { KisiId = id });
+            var result = await mediator.Send(new GetKisiByIdQuery { KisiId = id });
             return result;
         }
 

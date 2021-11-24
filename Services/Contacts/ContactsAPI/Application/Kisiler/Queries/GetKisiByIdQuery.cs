@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.Kisiler.Queries
 {
-    public class GetIletisimByIdQuery : IRequest<KisiDTO>
+    public class GetKisiByIdQuery : IRequest<KisiDTO>
     {
         public Guid KisiId { get; set; }
     }
 
-    public class GetKisiByIdHandle : IRequestHandler<GetIletisimByIdQuery, KisiDTO>
+    public class GetKisiByIdHandle : IRequestHandler<GetKisiByIdQuery, KisiDTO>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
@@ -25,7 +25,7 @@ namespace ContactsAPI.Application.Kisiler.Queries
             this.mapper = mapper;
         }
 
-        public async Task<KisiDTO> Handle(GetIletisimByIdQuery request, CancellationToken cancellationToken)
+        public async Task<KisiDTO> Handle(GetKisiByIdQuery request, CancellationToken cancellationToken)
         {
             Kisi kisi = await db.Kisiler.FindAsync(request.KisiId);
             KisiDTO result = mapper.Map<KisiDTO>(kisi);
