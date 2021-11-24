@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.Kisiler.Commands
 {
-    public class CreateIletisimCommand : IRequest<Guid>
+    public class CreateKisiCommand : IRequest<Guid>
     {
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public string Firma { get; set; }
     }
 
-    public class CreateKisiHandle : IRequestHandler<CreateIletisimCommand, Guid>
+    public class CreateKisiHandle : IRequestHandler<CreateKisiCommand, Guid>
     {
         private readonly DatabaseContext db;
 
@@ -23,7 +23,7 @@ namespace ContactsAPI.Application.Kisiler.Commands
             this.db = db;
         }
 
-        public async Task<Guid> Handle(CreateIletisimCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateKisiCommand request, CancellationToken cancellationToken)
         {
             Kisi data = new Kisi
             {

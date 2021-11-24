@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.Kisiler.Commands
 {
-    public class DeleteIletisimCommand : IRequest<bool>
+    public class DeleteKisiCommand : IRequest<bool>
     {
         public Guid KisiId { get; set; }
     }
 
-    public class DeleteKisiHandle : IRequestHandler<DeleteIletisimCommand, bool>
+    public class DeleteKisiHandle : IRequestHandler<DeleteKisiCommand, bool>
     {
         private readonly DatabaseContext db;
 
@@ -21,7 +21,7 @@ namespace ContactsAPI.Application.Kisiler.Commands
             this.db = db;
         }
 
-        public async Task<bool> Handle(DeleteIletisimCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteKisiCommand request, CancellationToken cancellationToken)
         {
             Kisi saved = await db.Kisiler.FindAsync(request.KisiId);
             db.Kisiler.Remove(saved);

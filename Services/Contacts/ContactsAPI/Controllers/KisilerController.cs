@@ -2,7 +2,6 @@
 using ContactsAPI.Application.Kisiler.Queries;
 using ContactsAPI.Domains;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -30,21 +29,21 @@ namespace ContactsAPI.Controllers
         }
 
         [HttpPost("GetAllKisiler")]
-        public async Task<List<KisiDTO>> GetAllKisiler([FromBody]GetAllIletisimQuery req)
+        public async Task<List<KisiDTO>> GetAllKisiler([FromBody]GetAllKisilerQuery req)
         {
             var result = await mediator.Send(req);
             return result;
         }
 
         [HttpPost]
-        public async Task<Guid> Post(CreateIletisimCommand command)
+        public async Task<Guid> Post(CreateKisiCommand command)
         {
             Guid result = await mediator.Send(command);
             return result;
         }
 
         [HttpPut]
-        public async Task<bool> Put(UpdateIletisimCommand command)
+        public async Task<bool> Put(UpdateKisiCommand command)
         {
             bool result = await mediator.Send(command);
             return result;
@@ -53,7 +52,7 @@ namespace ContactsAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<bool> Delete(Guid id)
         {
-            bool result = await mediator.Send(new DeleteIletisimCommand { KisiId = id });
+            bool result = await mediator.Send(new DeleteKisiCommand { KisiId = id });
             return result;
         }
     }

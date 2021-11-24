@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
+using MediatR;
 
 namespace ContactsAPI
 {
@@ -24,6 +25,7 @@ namespace ContactsAPI
             string cnn = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(cnn));
             services.AddAutoMapper(typeof(Startup));
+            services.AddMediatR(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -31,8 +33,10 @@ namespace ContactsAPI
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)
         {
+            db.Database.EnsureCreated();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactsAPI.Application.Iletisimler.Queries
+namespace ContactsAPI.Application.IletisimBilgileri.Queries
 {
     public class GetIletisimByIdQuery : IRequest<IletisimDTO>
     {

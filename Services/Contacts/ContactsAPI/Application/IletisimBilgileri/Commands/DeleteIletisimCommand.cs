@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactsAPI.Application.Iletisimler.Commands
+namespace ContactsAPI.Application.IletisimBilgileri.Commands
 {
     public class DeleteIletisimCommand : IRequest<bool>
     {
