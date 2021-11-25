@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using ContactsAPI.Domains;
 using ContactsAPI.Entities;
 using ContactsAPI.Persistance;
 using MediatR;
+using SharedLibrary.Messages;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace ContactsAPI.Application.Kisiler.Queries
 {

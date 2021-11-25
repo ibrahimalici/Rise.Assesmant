@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using ContactsAPI.Domains;
 using ContactsAPI.Entities;
 using ContactsAPI.Persistance;
 using MediatR;
+using SharedLibrary.Messages;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

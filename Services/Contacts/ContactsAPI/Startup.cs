@@ -1,4 +1,8 @@
+using ContactsAPI.Application.Communications;
+using ContactsAPI.Mappings;
 using ContactsAPI.Persistance;
+using MassTransit;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,8 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using AutoMapper;
-using MediatR;
 
 namespace ContactsAPI
 {
@@ -23,14 +25,35 @@ namespace ContactsAPI
         public void ConfigureServices(IServiceCollection services)
         {
             string cnn = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");
+            string queeHost = Configuration.GetValue<string>("DatabaseSettings:RabbitMQHost");
+            string queeUserName = Configuration.GetValue<string>("DatabaseSettings:RabbitMQUserName");
+            string queePass = Configuration.GetValue<string>("DatabaseSettings:RabbitMQPass");
+
+            services.AddMassTransit(o=>
+            {
+                o.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(queeHost, "/", h =>
+                      {
+                          h.Username(queeUserName);
+                          h.Password(queePass);
+                      });
+                });
+            });
+
+            services.AddMassTransitHostedService();
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(cnn));
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile(new AutoMapperConfigurations());
+            });
             services.AddMediatR(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactsAPI", Version = "v1" });
             });
+            services.AddScoped<MassTransitHelper>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)

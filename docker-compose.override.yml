@@ -13,6 +13,26 @@ services:
     ports:
      - "5432:5432"
 
+  mongo-reports:
+    container_name: mongo-reports
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: azx1234
+    volumes:
+     - mongo-reports-volume:/data/db
+     - mongo-reports-volume:/data/config/db
+    ports:
+     - "27017:27017"
+
+  rabbitMQ:
+    container_name: rabbitMQ
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   apigateway:
     environment:
      - ASPNETCORE_ENVIRONMENT=Development

@@ -1,5 +1,5 @@
-﻿using ContactsAPI.Application.Kisiler.Commands;
-using ContactsAPI.Application.Kisiler.Queries;
+﻿using ContactsAPI.Application.IletisimBilgileri.Commands;
+using ContactsAPI.Application.IletisimBilgileri.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Messages;
@@ -11,39 +11,39 @@ namespace ContactsAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class KisilerController : ControllerBase
+    public class IletisimController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public KisilerController(IMediator mediator)
+        public IletisimController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
         [HttpGet("{id}")]
-        public async Task<KisiDTO> Get([FromRoute] Guid id)
+        public async Task<IletisimDTO> Get([FromRoute] Guid id)
         {
 
-            var result = await mediator.Send(new GetKisiByIdQuery { KisiId = id });
+            var result = await mediator.Send(new GetIletisimByIdQuery { IletisimId = id });
             return result;
         }
 
-        [HttpPost("GetAllKisiler")]
-        public async Task<List<KisiDTO>> GetAllKisiler([FromBody]GetAllKisilerQuery req)
+        [HttpPost("GetAllIletisim")]
+        public async Task<List<IletisimDTO>> GetAllIletisim([FromBody] GetAllIletisimQuery req)
         {
             var result = await mediator.Send(req);
             return result;
         }
 
         [HttpPost]
-        public async Task<Guid> Post(CreateKisiCommand command)
+        public async Task<Guid> Post(CreateIletisimCommand command)
         {
             Guid result = await mediator.Send(command);
             return result;
         }
 
         [HttpPut]
-        public async Task<bool> Put(UpdateKisiCommand command)
+        public async Task<bool> Put(UpdateIletisimCommand command)
         {
             bool result = await mediator.Send(command);
             return result;
@@ -52,7 +52,7 @@ namespace ContactsAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<bool> Delete(Guid id)
         {
-            bool result = await mediator.Send(new DeleteKisiCommand { KisiId = id });
+            bool result = await mediator.Send(new DeleteIletisimCommand { IletisimId = id });
             return result;
         }
     }

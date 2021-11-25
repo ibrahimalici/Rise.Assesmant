@@ -4,7 +4,12 @@ services:
 
   postgresql_db:
     image: postgres:latest
-    
+   
+  mongo-reports:
+    image: mongo
+
+  rabbitMQ:
+    image: rabbitmq:3-management
 
   apigateway:
     image: ${DOCKER_REGISTRY-}apigateway
@@ -22,3 +27,6 @@ volumes:
   postgres-volume:
     name: postgres-volume
     external: false
+  mongo-reports-volume:
+   name: mongo-reports-volume
+   external: false

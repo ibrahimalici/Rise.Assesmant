@@ -1,17 +1,20 @@
 ﻿using AutoMapper;
-using ContactsAPI.Domains;
+using ContactsAPI.Entities;
 using ContactsAPI.Persistance;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using SharedLibrary.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ContactsAPI.Entities;
 
 namespace ContactsAPI.Application.IletisimBilgileri.Queries
 {
     public class GetAllIletisimQuery : IRequest<List<IletisimDTO>>
     {
+        public Guid? KisiId { get; set; }
         public bool Paging { get; set; }
         public int StartIndex { get; set; }
         public int RecordCount { get; set; }
@@ -33,10 +36,14 @@ namespace ContactsAPI.Application.IletisimBilgileri.Queries
             List<Iletisim> data = new List<Iletisim>();
 
             if (!request.Paging)
-                data = db.IletisimBilgileri.ToList();
+                data = db.IletisimBilgileri.Include(o => o.Kisi)
+                    .Where(p => !request.KisiId.HasValue || request.KisiId.ToString().Contains("00000") || p.KisiId == request.KisiId.Value)
+                    .ToList();
             else
             {
-                db.IletisimBilgileri.Skip(request.StartIndex).Take(request.RecordCount).ToList();
+                data = db.IletisimBilgileri.Include(o=>o.Kisi)
+                    .Where(p=> !request.KisiId.HasValue || request.KisiId.ToString().Contains("00000") || p.KisiId == request.KisiId.Value)
+                    .Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 
             List<IletisimDTO> result = mapper.Map<List<IletisimDTO>>(data);

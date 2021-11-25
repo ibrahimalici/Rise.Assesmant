@@ -1,6 +1,6 @@
-﻿using ContactsAPI.Domains;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SharedLibrary.Messages;
 using System;
 
 namespace ContactsAPI.Entities

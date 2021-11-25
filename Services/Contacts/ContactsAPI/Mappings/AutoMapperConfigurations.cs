@@ -6,8 +6,8 @@ namespace ContactsAPI.Mappings
     {
         public AutoMapperConfigurations()
         {
-            CreateMap<ContactsAPI.Entities.Iletisim, ContactsAPI.Domains.IletisimDTO>();
-            CreateMap<ContactsAPI.Entities.Kisi, ContactsAPI.Domains.KisiDTO>();
+            CreateMap<ContactsAPI.Entities.Kisi, SharedLibrary.Messages.KisiDTO>();
+            CreateMap<ContactsAPI.Entities.Iletisim, SharedLibrary.Messages.IletisimDTO>();
         }
     }
 }
