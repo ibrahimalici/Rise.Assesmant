@@ -3,7 +3,7 @@ using ContactsAPI.Entities;
 using ContactsAPI.Persistance;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SharedLibrary.Messages;
+using SharedLibrary.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;

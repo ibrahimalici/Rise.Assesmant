@@ -1,4 +1,5 @@
-﻿using SharedLibrary.Messages;
+﻿using SharedLibrary.Domains;
+using SharedLibrary.Messages;
 using System;
 
 namespace ReportsAPI.Entities

@@ -2,6 +2,7 @@
 using ContactsAPI.Application.Kisiler.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.Domains;
 using SharedLibrary.Messages;
 using System;
 using System.Collections.Generic;

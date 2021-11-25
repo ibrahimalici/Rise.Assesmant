@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using ReportsAPI.Data;
 using ReportsAPI.Entities;
-using SharedLibrary.Messages;
+using SharedLibrary.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,43 +11,37 @@ using System.Threading.Tasks;
 
 namespace ReportsAPI.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class DataRepository : IDataRepository
     {
         private readonly IConfiguration Configuration;
         private readonly MongoClient mongoClient = null;
         private readonly IMongoDatabase database = null;
-        private readonly IMongoCollection<Kisi> productsTable = null;
+        private readonly IMongoCollection<Report> reportTable = null;
         private readonly IMapper mapper = null;
 
-        public ProductRepository(IConfiguration configuration, IMapper mapper)
+        public DataRepository(IConfiguration configuration, IMapper mapper)
         {
             string mongoCnn = Configuration.GetValue<string>("DatabaseSettings:MongoConnectionString");
             string mongoProductDb = Configuration.GetValue<string>("DatabaseSettings:MongoContactsDB");
             string mongoProductsTable = Configuration.GetValue<string>("DatabaseSettings:MongoContactsTable");
             mongoClient = new MongoClient(mongoCnn);
             database = mongoClient.GetDatabase(mongoProductDb);
-            productsTable = database.GetCollection<Kisi>(mongoProductsTable);
+            reportTable = database.GetCollection<Report>(mongoProductsTable);
 
             this.mapper = mapper;
         }
 
-        public async Task<List<KisiDTO>> GetReportObject()
+        public async Task<ReportDTO> GetReportObject()
         {
-            List<Kisi> kisiler = await productsTable.AsQueryable().ToListAsync();
-            List<KisiDTO> result = mapper.Map<List<KisiDTO>>(kisiler);
+            Report report = await reportTable.AsQueryable().FirstOrDefaultAsync();
+            ReportDTO result = mapper.Map<ReportDTO>(report);
             return result;
         }
 
-        public async Task<bool> SaveKisi(KisiDTO kisi)
+        public async Task<bool> PrepareReport(ReportDTO report)
         {
-            var new_ = mapper.Map<Kisi>(kisi);
-            await productsTable.ReplaceOneAsync(o => o.Id == new_.Id, new_);
-            return true;
-        }
-
-        public async Task<bool> DeleteKisi(Guid kisiId)
-        {
-            await productsTable.DeleteOneAsync(o => o.Id == kisiId);
+            var new_ = mapper.Map<Report>(report);
+            await reportTable.ReplaceOneAsync(o => o.Id == new_.Id, new_);
             return true;
         }
     }

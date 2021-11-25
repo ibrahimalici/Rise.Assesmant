@@ -2,6 +2,7 @@
 using ContactsAPI.Entities;
 using ContactsAPI.Persistance;
 using MediatR;
+using SharedLibrary.Domains;
 using SharedLibrary.Messages;
 using System;
 using System.Threading;
