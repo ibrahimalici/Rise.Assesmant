@@ -31,6 +31,8 @@ namespace ContactsAPI
 
             services.AddMassTransit(o=>
             {
+                o.AddConsumer<ReportResultMessageConsumer>();
+
                 o.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host(queeHost, "/", h =>

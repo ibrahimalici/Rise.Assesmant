@@ -15,7 +15,7 @@ namespace ContactsAPI.Persistance
 
         public DbSet<Kisi> Kisiler { get; set; }
         public DbSet<Iletisim> IletisimBilgileri { get; set; }
-
+        public DbSet<Report> Raporlar { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string cnn = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");
@@ -28,6 +28,7 @@ namespace ContactsAPI.Persistance
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new KisiConfiguration());
             modelBuilder.ApplyConfiguration(new IletisimConfiguration());
+            modelBuilder.ApplyConfiguration(new ReportConfiguration());
         }
     }
 }

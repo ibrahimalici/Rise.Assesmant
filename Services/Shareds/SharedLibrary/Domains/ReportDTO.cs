@@ -11,7 +11,7 @@ namespace SharedLibrary.Domains
         public Guid Id { get; set; }
         public DateTime RaporTalepTarihi { get; set; }
         public ReportStatus RaporDurumu { get; set; }
-        public List<ReportDetailDTO> Reports { get;}
+        public List<ReportDetailDTO> Reports { get; set; }
     }
 
     public class ReportDetailDTO
