@@ -13,9 +13,9 @@ namespace ContactsAPI.Persistance
             Configuration = configuration;
         }
 
-        public DbSet<Kisi> Kisiler { get; set; }
-        public DbSet<Iletisim> IletisimBilgileri { get; set; }
-        public DbSet<Report> Raporlar { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<ContactDetail> ContactDetails { get; set; }
+        public DbSet<Report> Reports { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string cnn = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");

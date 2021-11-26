@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.IletisimBilgileri.Queries
 {
-    public class GetIletisimByIdQuery : IRequest<IletisimDTO>
+    public class GetIletisimByIdQuery : IRequest<ContactDetailsDTO>
     {
         public Guid IletisimId { get; set; }
     }
 
-    public class GetIletisimByIdHandle : IRequestHandler<GetIletisimByIdQuery, IletisimDTO>
+    public class GetIletisimByIdHandle : IRequestHandler<GetIletisimByIdQuery, ContactDetailsDTO>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
@@ -26,10 +26,10 @@ namespace ContactsAPI.Application.IletisimBilgileri.Queries
             this.mapper = mapper;
         }
 
-        public async Task<IletisimDTO> Handle(GetIletisimByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ContactDetailsDTO> Handle(GetIletisimByIdQuery request, CancellationToken cancellationToken)
         {
-            Iletisim Iletisim = await db.IletisimBilgileri.Include(o => o.Kisi).FirstOrDefaultAsync(x=>x.Id == request.IletisimId);
-            IletisimDTO result = mapper.Map<IletisimDTO>(Iletisim);
+            ContactDetail Iletisim = await db.ContactDetails.Include(o => o.Kisi).FirstOrDefaultAsync(x=>x.Id == request.IletisimId);
+            ContactDetailsDTO result = mapper.Map<ContactDetailsDTO>(Iletisim);
             return result;
         }
     }

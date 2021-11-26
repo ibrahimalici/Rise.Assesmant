@@ -31,7 +31,7 @@ namespace ContactsAPI.Application.Kisiler.Commands
 
         public async Task<bool> Handle(UpdateKisiCommand request, CancellationToken cancellationToken)
         {
-            Kisi saved = await db.Kisiler.FindAsync(request.Id);
+            Contact saved = await db.Contacts.FindAsync(request.Id);
 
             saved.Ad = request.Ad;
             saved.Firma =request.Firma;

@@ -11,49 +11,49 @@ namespace ContactsAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class IletisimController : ControllerBase
+    public class ContactDetailsController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public IletisimController(IMediator mediator)
+        public ContactDetailsController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
         [HttpGet("{id}")]
-        public async Task<IletisimDTO> Get([FromRoute] Guid id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
 
             var result = await mediator.Send(new GetIletisimByIdQuery { IletisimId = id });
-            return result;
+            return Ok(result);
         }
 
-        [HttpPost("GetAllIletisim")]
-        public async Task<List<IletisimDTO>> GetAllIletisim([FromBody] GetAllIletisimQuery req)
+        [HttpPost("GetAll")]
+        public async Task<IActionResult> GetAll([FromBody] GetAllIletisimQuery req)
         {
             var result = await mediator.Send(req);
-            return result;
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<Guid> Post(CreateIletisimCommand command)
+        public async Task<IActionResult> Post(CreateIletisimCommand command)
         {
             Guid result = await mediator.Send(command);
-            return result;
+            return Ok(result);
         }
 
         [HttpPut]
-        public async Task<bool> Put(UpdateIletisimCommand command)
+        public async Task<IActionResult> Put(UpdateIletisimCommand command)
         {
             bool result = await mediator.Send(command);
-            return result;
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             bool result = await mediator.Send(new DeleteIletisimCommand { IletisimId = id });
-            return result;
+            return Ok(result);
         }
     }
 }

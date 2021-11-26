@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SharedLibrary.Domains
 {
-    public class IletisimDTO
+    public class ContactDetailsDTO
     {
         public Guid Id { get; set; }
         public ContactDetailType BilgiTipi { get; set; }
         public string BilgiIcerigi { get; set; }
         public Guid KisiId { get; set; }
-        public KisiDTO Kisi { get; set; }
+        public ContactsDTO Kisi { get; set; }
     }
 }

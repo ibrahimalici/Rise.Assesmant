@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.IletisimBilgileri.Queries
 {
-    public class GetAllIletisimQuery : IRequest<List<IletisimDTO>>
+    public class GetAllIletisimQuery : IRequest<List<ContactDetailsDTO>>
     {
         public Guid? KisiId { get; set; }
         public bool Paging { get; set; }
@@ -20,7 +20,7 @@ namespace ContactsAPI.Application.IletisimBilgileri.Queries
         public int RecordCount { get; set; }
     }
 
-    public class GetAllIletisimHandle : IRequestHandler<GetAllIletisimQuery, List<IletisimDTO>>
+    public class GetAllIletisimHandle : IRequestHandler<GetAllIletisimQuery, List<ContactDetailsDTO>>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
@@ -31,22 +31,22 @@ namespace ContactsAPI.Application.IletisimBilgileri.Queries
             this.mapper = mapper;
         }
 
-        public async Task<List<IletisimDTO>> Handle(GetAllIletisimQuery request, CancellationToken cancellationToken)
+        public async Task<List<ContactDetailsDTO>> Handle(GetAllIletisimQuery request, CancellationToken cancellationToken)
         {
-            List<Iletisim> data = new List<Iletisim>();
+            List<ContactDetail> data = new List<ContactDetail>();
 
             if (!request.Paging)
-                data = db.IletisimBilgileri.Include(o => o.Kisi)
+                data = db.ContactDetails.Include(o => o.Kisi)
                     .Where(p => !request.KisiId.HasValue || request.KisiId.ToString().Contains("00000") || p.KisiId == request.KisiId.Value)
                     .ToList();
             else
             {
-                data = db.IletisimBilgileri.Include(o=>o.Kisi)
+                data = db.ContactDetails.Include(o=>o.Kisi)
                     .Where(p=> !request.KisiId.HasValue || request.KisiId.ToString().Contains("00000") || p.KisiId == request.KisiId.Value)
                     .Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 
-            List<IletisimDTO> result = mapper.Map<List<IletisimDTO>>(data);
+            List<ContactDetailsDTO> result = mapper.Map<List<ContactDetailsDTO>>(data);
             return result;
         }
     }

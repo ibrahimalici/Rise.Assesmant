@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ContactsAPI.Entities
 {
-    public class Kisi
+    public class Contact
     {
         [Key]
         public Guid Id { get; set; }
@@ -14,12 +14,12 @@ namespace ContactsAPI.Entities
         public string Soyad { get; set; }
         public string Firma { get; set; }
 
-        public List<Iletisim> IletisimBilgileri = new List<Iletisim>();
+        public List<ContactDetail> IletisimBilgileri = new List<ContactDetail>();
     }
 
-    public class KisiConfiguration : IEntityTypeConfiguration<Kisi>
+    public class KisiConfiguration : IEntityTypeConfiguration<Contact>
     {
-        public void Configure(EntityTypeBuilder<Kisi> builder)
+        public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x=>x.Ad).HasMaxLength(80).IsRequired();

@@ -30,14 +30,14 @@ namespace ContactsAPI.Application.Kisiler.Commands
 
         public async Task<Guid> Handle(CreateKisiCommand request, CancellationToken cancellationToken)
         {
-            Kisi data = new Kisi
+            Contact data = new Contact
             {
                 Ad = request.Ad,
                 Soyad = request.Soyad,
                 Firma = request.Firma,
                 Id = Guid.NewGuid()
             };
-            await db.Kisiler.AddAsync(data);
+            await db.Contacts.AddAsync(data);
             await db.SaveChangesAsync();
 
             return data.Id;

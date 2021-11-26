@@ -6,8 +6,8 @@ namespace ContactsAPI.Mappings
     {
         public AutoMapperConfigurations()
         {
-            CreateMap<ContactsAPI.Entities.Kisi, SharedLibrary.Domains.KisiDTO>();
-            CreateMap<ContactsAPI.Entities.Iletisim, SharedLibrary.Domains.IletisimDTO>();
+            CreateMap<ContactsAPI.Entities.Contact, SharedLibrary.Domains.ContactsDTO>();
+            CreateMap<ContactsAPI.Entities.ContactDetail, SharedLibrary.Domains.ContactDetailsDTO>();
             CreateMap<ContactsAPI.Entities.Report, SharedLibrary.Domains.ReportDTO>().ReverseMap();
         }
     }

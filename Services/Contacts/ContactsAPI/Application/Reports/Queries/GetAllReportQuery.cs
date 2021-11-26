@@ -28,7 +28,7 @@ namespace ContactsAPI.Application.ReportBilgileri.Queries
 
         public async Task<List<ReportDTO>> Handle(GetAllReportQuery request, CancellationToken cancellationToken)
         {
-            List<Report> data = await db.Raporlar.ToListAsync();
+            List<Report> data = await db.Reports.ToListAsync();
             List<ReportDTO> result = mapper.Map<List<ReportDTO>>(data);
             return result;
         }

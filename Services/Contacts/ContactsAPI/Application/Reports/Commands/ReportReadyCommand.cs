@@ -23,7 +23,7 @@ namespace ContactsAPI.Application.Reports.Commands
 
         public async Task<bool> Handle(ReportReadyCommand request, CancellationToken cancellationToken)
         {
-            Report report = await db.Raporlar.FindAsync(request.ReportId);
+            Report report = await db.Reports.FindAsync(request.ReportId);
             report.RaporDurumu = SharedLibrary.Domains.ReportStatus.Tamamlandi;
             await db.SaveChangesAsync();
             return true;

@@ -6,18 +6,18 @@ using System;
 
 namespace ContactsAPI.Entities
 {
-    public class Iletisim
+    public class ContactDetail
     {
         public Guid Id { get; set; }
         public ContactDetailType BilgiTipi { get; set; }
         public string BilgiIcerigi { get; set; }
         public Guid KisiId { get; set; }
-        public Kisi Kisi { get; set; }
+        public Contact Kisi { get; set; }
     }
 
-    public class IletisimConfiguration : IEntityTypeConfiguration<Iletisim>
+    public class IletisimConfiguration : IEntityTypeConfiguration<ContactDetail>
     {
-        public void Configure(EntityTypeBuilder<Iletisim> builder)
+        public void Configure(EntityTypeBuilder<ContactDetail> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x=>x.BilgiIcerigi).HasMaxLength(120).IsRequired();

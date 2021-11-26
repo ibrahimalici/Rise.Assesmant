@@ -35,12 +35,12 @@ namespace ContactsAPI.Application.Reports.Commands
             report.Id = Guid.NewGuid();
             report.RaporTalepTarihi = DateTime.Now;
             report.RaporDurumu = ReportStatus.Hazirlaniyor;
-            await db.Raporlar.AddAsync(report);
+            await db.Reports.AddAsync(report);
 
             ReportDTO messageObject = mapper.Map<ReportDTO>(report);
 
-            var result1 = from p in db.IletisimBilgileri
-                          join q in db.Kisiler on p.KisiId equals q.Id
+            var result1 = from p in db.ContactDetails
+                          join q in db.Contacts on p.KisiId equals q.Id
                           where p.BilgiTipi == ContactDetailType.Konum
                           group p by p.BilgiIcerigi into grouped
                           select new
@@ -49,8 +49,8 @@ namespace ContactsAPI.Application.Reports.Commands
                               kisiSayisi = grouped.Count(),
                           };
 
-            var result2 = from p in db.IletisimBilgileri
-                          join q in db.IletisimBilgileri on p.KisiId equals q.KisiId
+            var result2 = from p in db.ContactDetails
+                          join q in db.ContactDetails on p.KisiId equals q.KisiId
                           where p.BilgiTipi == ContactDetailType.Konum && q.BilgiTipi == ContactDetailType.TelNo
                           group p by p.BilgiIcerigi into grouped
                           select new

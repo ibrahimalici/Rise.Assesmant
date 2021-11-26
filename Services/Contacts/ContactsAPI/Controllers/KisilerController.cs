@@ -2,21 +2,18 @@
 using ContactsAPI.Application.Kisiler.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SharedLibrary.Domains;
-using SharedLibrary.Messages;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ContactsAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class KisilerController : ControllerBase
+    public class ContactsController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public KisilerController(IMediator mediator)
+        public ContactsController(IMediator mediator)
         {
             this.mediator = mediator;
         }

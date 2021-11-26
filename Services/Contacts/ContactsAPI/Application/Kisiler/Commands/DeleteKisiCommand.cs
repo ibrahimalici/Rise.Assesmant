@@ -23,8 +23,8 @@ namespace ContactsAPI.Application.Kisiler.Commands
 
         public async Task<bool> Handle(DeleteKisiCommand request, CancellationToken cancellationToken)
         {
-            Kisi saved = await db.Kisiler.FindAsync(request.KisiId);
-            db.Kisiler.Remove(saved);
+            Contact saved = await db.Contacts.FindAsync(request.KisiId);
+            db.Contacts.Remove(saved);
             await db.SaveChangesAsync();
             return true;
         }

@@ -30,7 +30,7 @@ namespace ContactsAPI.Application.IletisimBilgileri.Commands
 
         public async Task<bool> Handle(UpdateIletisimCommand request, CancellationToken cancellationToken)
         {
-            Iletisim saved = await db.IletisimBilgileri.FindAsync(request.Id);
+            ContactDetail saved = await db.ContactDetails.FindAsync(request.Id);
 
             saved.BilgiTipi = request.BilgiTipi;
             saved.BilgiIcerigi = request.BilgiIcerigi;

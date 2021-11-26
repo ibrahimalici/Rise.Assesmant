@@ -29,14 +29,14 @@ namespace ContactsAPI.Application.IletisimBilgileri.Commands
 
         public async Task<Guid> Handle(CreateIletisimCommand request, CancellationToken cancellationToken)
         {
-            Iletisim data = new Iletisim
+            ContactDetail data = new ContactDetail
             {
                 Id= Guid.NewGuid(),
                 KisiId = request.KisiId,
                 BilgiTipi = request.BilgiTipi,
                 BilgiIcerigi = request.BilgiIcerigi
             };
-            await db.IletisimBilgileri.AddAsync(data);
+            await db.ContactDetails.AddAsync(data);
             await db.SaveChangesAsync();
             return data.Id;
         }

@@ -28,8 +28,8 @@ namespace ContactsAPI.Application.IletisimBilgileri.Commands
 
         public async Task<bool> Handle(DeleteIletisimCommand request, CancellationToken cancellationToken)
         {
-            Iletisim saved = await db.IletisimBilgileri.FindAsync(request.IletisimId);
-            db.IletisimBilgileri.Remove(saved);
+            ContactDetail saved = await db.ContactDetails.FindAsync(request.IletisimId);
+            db.ContactDetails.Remove(saved);
             await db.SaveChangesAsync();
 
             return true;

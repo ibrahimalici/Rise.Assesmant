@@ -11,14 +11,14 @@ using System.Linq;
 
 namespace ContactsAPI.Application.Kisiler.Queries
 {
-    public class GetAllKisilerQuery : IRequest<List<KisiDTO>>
+    public class GetAllKisilerQuery : IRequest<List<ContactsDTO>>
     {
         public bool Paging { get; set; }
         public int StartIndex { get; set; }
         public int RecordCount { get; set; }
     }
 
-    public class GetAllKisilerHandle : IRequestHandler<GetAllKisilerQuery, List<KisiDTO>>
+    public class GetAllKisilerHandle : IRequestHandler<GetAllKisilerQuery, List<ContactsDTO>>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
@@ -29,18 +29,18 @@ namespace ContactsAPI.Application.Kisiler.Queries
             this.mapper = mapper;
         }
 
-        public async Task<List<KisiDTO>> Handle(GetAllKisilerQuery request, CancellationToken cancellationToken)
+        public async Task<List<ContactsDTO>> Handle(GetAllKisilerQuery request, CancellationToken cancellationToken)
         {
-            List<Kisi> data = new List<Kisi>();
+            List<Contact> data = new List<Contact>();
 
             if (!request.Paging)
-                data = db.Kisiler.ToList();
+                data = db.Contacts.ToList();
             else
             {
-                data = db.Kisiler.Skip(request.StartIndex).Take(request.RecordCount).ToList();
+                data = db.Contacts.Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 
-            List<KisiDTO> result = mapper.Map<List<KisiDTO>>(data);
+            List<ContactsDTO> result = mapper.Map<List<ContactsDTO>>(data);
             return result;
         }
     }
