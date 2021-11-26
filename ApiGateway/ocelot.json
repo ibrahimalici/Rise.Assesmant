@@ -1,0 +1,43 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v1/ContactsAPI/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contactsapi",
+          //"Host": "localhost",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Contacts/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/ContactsDetailsAPI/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contactsapi",
+          //"Host": "localhost",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ContactsDetails/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/ReportsAPI/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordersapi",
+          //"Host": "localhost",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Reports/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    }
+  ]
+}

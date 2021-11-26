@@ -1,5 +1,6 @@
 ﻿using ContactsAPI.Application.Kisiler.Commands;
 using ContactsAPI.Application.Kisiler.Queries;
+using ContactsAPI.Application.Reports.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,7 +28,7 @@ namespace ContactsAPI.Controllers
         }
 
         [HttpPost("GetAll")]
-        public async Task<IActionResult> GetAll([FromBody]GetAllKisilerQuery req)
+        public async Task<IActionResult> GetAll([FromBody] GetAllKisilerQuery req)
         {
             var result = await mediator.Send(req);
             return Ok(result);
@@ -51,6 +52,13 @@ namespace ContactsAPI.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             bool result = await mediator.Send(new DeleteKisiCommand { KisiId = id });
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PrepareReport()
+        {
+            var result = await mediator.Send(new PrepareReportCommand());
             return Ok(result);
         }
     }
