@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ContactsAPI.Application.Kisiler.Queries
 {
@@ -36,7 +37,7 @@ namespace ContactsAPI.Application.Kisiler.Queries
                 data = db.Kisiler.ToList();
             else
             {
-                db.Kisiler.Skip(request.StartIndex).Take(request.RecordCount).ToList();
+                data = db.Kisiler.Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 
             List<KisiDTO> result = mapper.Map<List<KisiDTO>>(data);

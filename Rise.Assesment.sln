@@ -3,23 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{77E41D50-1959-40C4-B3F7-3C8A6B4E93A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{77E41D50-1959-40C4-B3F7-3C8A6B4E93A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4A6F18F4-07DD-41CE-9F1F-1F646A4BD5C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contacts", "Contacts", "{2E6ED568-62D5-4FF5-9095-686574E5C5A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsAPI", "Services\Contacts\ContactsAPI\ContactsAPI.csproj", "{B9644C5D-0B77-4166-A1D7-0E33FF71B91E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsAPI", "Services\Contacts\ContactsAPI\ContactsAPI.csproj", "{B9644C5D-0B77-4166-A1D7-0E33FF71B91E}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{54FC492D-1977-4909-BE66-9283769245B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{54D166DD-7388-4DF5-AC31-9CD4FAC28CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsAPI", "Services\Reports\ReportsAPI\ReportsAPI.csproj", "{D1A538D6-522A-4121-BDE2-0E838981CE49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportsAPI", "Services\Reports\ReportsAPI\ReportsAPI.csproj", "{D1A538D6-522A-4121-BDE2-0E838981CE49}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shareds", "Shareds", "{341C4407-4331-465E-8DAF-E8E3BE5E91BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "Services\Shareds\SharedLibrary\SharedLibrary.csproj", "{6B087BF0-3D22-4762-9FAF-E1B42CA1B7E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "Services\Shareds\SharedLibrary\SharedLibrary.csproj", "{6B087BF0-3D22-4762-9FAF-E1B42CA1B7E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{8DBAE67F-D2F7-4892-893E-95751F631F2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsAPI.Test", "..\TestProjects\ContactsAPI.Test\ContactsAPI.Test.csproj", "{5EABB936-90EF-4435-AA95-09D388E15628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{6B087BF0-3D22-4762-9FAF-E1B42CA1B7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B087BF0-3D22-4762-9FAF-E1B42CA1B7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B087BF0-3D22-4762-9FAF-E1B42CA1B7E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EABB936-90EF-4435-AA95-09D388E15628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EABB936-90EF-4435-AA95-09D388E15628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EABB936-90EF-4435-AA95-09D388E15628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EABB936-90EF-4435-AA95-09D388E15628}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{D1A538D6-522A-4121-BDE2-0E838981CE49} = {54D166DD-7388-4DF5-AC31-9CD4FAC28CB5}
 		{341C4407-4331-465E-8DAF-E8E3BE5E91BD} = {4A6F18F4-07DD-41CE-9F1F-1F646A4BD5C2}
 		{6B087BF0-3D22-4762-9FAF-E1B42CA1B7E0} = {341C4407-4331-465E-8DAF-E8E3BE5E91BD}
+		{5EABB936-90EF-4435-AA95-09D388E15628} = {8DBAE67F-D2F7-4892-893E-95751F631F2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06D8BBD1-508A-407D-BC42-70A0156F7AA1}

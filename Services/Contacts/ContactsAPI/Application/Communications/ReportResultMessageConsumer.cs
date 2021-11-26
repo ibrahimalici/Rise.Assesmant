@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using ContactsAPI.Application.Reports.Commands;
+using MassTransit;
 using MediatR;
 using SharedLibrary.Messages;
 using System.Threading.Tasks;
@@ -14,9 +15,12 @@ namespace ContactsAPI.Application.Communications
             this.mediator = mediator;
         }
 
-        public Task Consume(ConsumeContext<ReportResultMessage> context)
+        public async Task Consume(ConsumeContext<ReportResultMessage> context)
         {
-            mediator.Send(new )
+            await mediator.Send(new ReportReadyCommand()
+            {
+                ReportId = context.Message.ReportId
+            });
         }
     }
 }

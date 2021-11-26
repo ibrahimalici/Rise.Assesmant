@@ -22,39 +22,39 @@ namespace ContactsAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<KisiDTO> Get([FromRoute] Guid id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
 
             var result = await mediator.Send(new GetKisiByIdQuery { KisiId = id });
-            return result;
+            return Ok(result);
         }
 
-        [HttpPost("GetAllKisiler")]
-        public async Task<List<KisiDTO>> GetAllKisiler([FromBody]GetAllKisilerQuery req)
+        [HttpPost("GetAll")]
+        public async Task<IActionResult> GetAll([FromBody]GetAllKisilerQuery req)
         {
             var result = await mediator.Send(req);
-            return result;
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<Guid> Post(CreateKisiCommand command)
+        public async Task<IActionResult> Post(CreateKisiCommand command)
         {
             Guid result = await mediator.Send(command);
-            return result;
+            return Ok(result);
         }
 
         [HttpPut]
-        public async Task<bool> Put(UpdateKisiCommand command)
+        public async Task<IActionResult> Put(UpdateKisiCommand command)
         {
             bool result = await mediator.Send(command);
-            return result;
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             bool result = await mediator.Send(new DeleteKisiCommand { KisiId = id });
-            return result;
+            return Ok(result);
         }
     }
 }

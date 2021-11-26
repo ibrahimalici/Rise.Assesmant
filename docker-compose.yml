@@ -22,6 +22,7 @@ services:
       dockerfile: Services/Contacts/ContactsAPI/Dockerfile
     ports:
       - "8080:80"
+      - "56849:443"
 
 volumes:
   postgres-volume:
@@ -29,4 +30,7 @@ volumes:
     external: false
   mongo-reports-volume:
    name: mongo-reports-volume
+   external: false
+  rabbitmq-volume:
+   name: rabbitmq-volume
    external: false

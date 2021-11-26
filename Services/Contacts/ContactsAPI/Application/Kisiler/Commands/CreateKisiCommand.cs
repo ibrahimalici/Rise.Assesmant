@@ -23,7 +23,7 @@ namespace ContactsAPI.Application.Kisiler.Commands
     {
         private readonly DatabaseContext db;
 
-        public CreateKisiHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
+        public CreateKisiHandle(DatabaseContext db)
         {
             this.db = db;
         }
