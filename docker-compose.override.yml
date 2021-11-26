@@ -66,5 +66,5 @@ services:
       dockerfile: Services/Reports/ReportsAPI/Dockerfile
     ports:
       - "8081:80"
-      - "56849:443"
+      - "56850:443"
 
