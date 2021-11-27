@@ -5,9 +5,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "contactsapi",
-          //"Host": "localhost",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/Contacts/{everything}",
@@ -19,9 +18,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "contactsapi",
-          //"Host": "localhost",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/ContactsDetails/{everything}",
@@ -33,9 +31,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "reportsapi",
-          //"Host": "localhost",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/api/Reports/{everything}",
@@ -50,12 +47,13 @@
         {
           "Name": "Contacts API",
           "Version": "v1",
-          "Url": "https://localhost:56849/swagger/v1/swagger.json"
+          "Url": "http://localhost:8080/swagger/v1/swagger.json"
         }
       ]
     },
     {
       "Key": "reports",
+
       "Config": [
         {
           "Name": "Reports API",
@@ -64,5 +62,8 @@
         }
       ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+
+  }
 }

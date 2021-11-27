@@ -1,5 +1,5 @@
-﻿using ContactsAPI.Application.IletisimBilgileri.Commands;
-using ContactsAPI.Application.IletisimBilgileri.Queries;
+﻿using ContactsAPI.Application.ContactSubDetails.Commands;
+using ContactsAPI.Application.ContactSubDetails.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Domains;
@@ -36,21 +36,21 @@ namespace ContactsAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateIletisimCommand command)
+        public async Task<IActionResult> Post([FromBody]CreateIletisimCommand command)
         {
             Guid result = await mediator.Send(command);
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(UpdateIletisimCommand command)
+        public async Task<IActionResult> Put([FromBody]UpdateIletisimCommand command)
         {
             bool result = await mediator.Send(command);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
             bool result = await mediator.Send(new DeleteIletisimCommand { IletisimId = id });
             return Ok(result);

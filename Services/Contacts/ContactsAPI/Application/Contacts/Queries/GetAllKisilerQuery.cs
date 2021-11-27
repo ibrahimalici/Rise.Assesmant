@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace ContactsAPI.Application.Kisiler.Queries
+namespace ContactsAPI.Application.ContactsInfo.Queries
 {
     public class GetAllKisilerQuery : IRequest<List<ContactsDTO>>
     {

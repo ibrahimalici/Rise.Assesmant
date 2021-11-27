@@ -19,7 +19,7 @@ namespace ReportsAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             var result = await db.GetReportObject(id);
             return Ok(result);

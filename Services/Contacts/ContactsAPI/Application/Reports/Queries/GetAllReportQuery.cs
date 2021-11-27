@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactsAPI.Application.ReportBilgileri.Queries
+namespace ContactsAPI.Application.ReportsInfo.Queries
 {
     public class GetAllReportQuery : IRequest<List<ReportDTO>>
     {

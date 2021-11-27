@@ -1,5 +1,5 @@
-﻿using ContactsAPI.Application.Kisiler.Commands;
-using ContactsAPI.Application.Kisiler.Queries;
+﻿using ContactsAPI.Application.ContactsInfo.Commands;
+using ContactsAPI.Application.ContactsInfo.Queries;
 using ContactsAPI.Application.Reports.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,21 +35,21 @@ namespace ContactsAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateKisiCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateKisiCommand command)
         {
             Guid result = await mediator.Send(command);
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(UpdateKisiCommand command)
+        public async Task<IActionResult> Put([FromBody] UpdateKisiCommand command)
         {
             bool result = await mediator.Send(command);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
             bool result = await mediator.Send(new DeleteKisiCommand { KisiId = id });
             return Ok(result);

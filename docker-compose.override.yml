@@ -38,7 +38,7 @@ services:
   apigateway:
     container_name: apigateway
     image: ${DOCKER_REGISTRY-}apigateway
-    restart: unless-stopped
+    restart: always
     build:
       context: .
       dockerfile: ApiGateway/Dockerfile
@@ -48,14 +48,19 @@ services:
       - "ServiceHost=apigateway"
       - "ServicePort=80"
     depends_on:
-      - database_service_orders
+      - contactsapi
+      - reportsapi
     ports:
-    - "8000:80"
+      - "8000:80"
+    links:
+      - contactsapi
+      - reportsapi
 
   contactsapi:
     build:
       context: .
       dockerfile: Services/Contacts/ContactsAPI/Dockerfile
+    restart: always
     environment:
       - "ASPNETCORE_ENVIRONMENT=Development"
       - "Scheme=http"
@@ -64,11 +69,18 @@ services:
     ports:
       - "8080:80"
       - "56849:443"
+    depends_on:
+      - postgresql_db
+      - rabbitMQ
+    links:
+      - postgresql_db
+      - rabbitMQ
 
   reportsapi:
     build:
       context: .
       dockerfile: Services/Reports/ReportsAPI/Dockerfile
+    restart: always
     environment:
       - "ASPNETCORE_ENVIRONMENT=Development"
       - "Scheme=http"
@@ -77,4 +89,9 @@ services:
     ports:
       - "8081:80"
       - "56850:443"
-
+    depends_on:
+      - mongo-reports
+      - rabbitMQ
+    links:
+      - mongo-reports
+      - rabbitMQ

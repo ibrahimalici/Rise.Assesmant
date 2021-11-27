@@ -8,7 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactsAPI.Application.Kisiler.Queries
+namespace ContactsAPI.Application.ContactsInfo.Queries
 {
     public class GetKisiByIdQuery : IRequest<ContactsDTO>
     {

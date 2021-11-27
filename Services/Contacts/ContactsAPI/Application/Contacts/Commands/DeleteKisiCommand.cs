@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactsAPI.Application.Kisiler.Commands
+namespace ContactsAPI.Application.ContactsInfo.Commands
 {
     public class DeleteKisiCommand : IRequest<bool>
     {

@@ -14,7 +14,7 @@ namespace ContactsAPI.Entities
         public string Soyad { get; set; }
         public string Firma { get; set; }
 
-        public List<ContactDetail> IletisimBilgileri = new List<ContactDetail>();
+        public List<ContactDetail> ContactSubDetails = new List<ContactDetail>();
     }
 
     public class KisiConfiguration : IEntityTypeConfiguration<Contact>

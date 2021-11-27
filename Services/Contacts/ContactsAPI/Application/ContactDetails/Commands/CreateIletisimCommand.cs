@@ -9,7 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ContactsAPI.Application.IletisimBilgileri.Commands
+namespace ContactsAPI.Application.ContactSubDetails.Commands
 {
     public class CreateIletisimCommand : IRequest<Guid>
     {

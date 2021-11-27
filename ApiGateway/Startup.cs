@@ -30,10 +30,10 @@ namespace ApiGateway
             services.AddControllers();
             services.AddOcelot();
             services.AddSwaggerForOcelot(Configuration);
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiGateway", Version = "v1" });
-            //});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiGateway", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +45,7 @@ namespace ApiGateway
             }
 
             app.UseSwaggerForOcelotUI();
+            app.UseSwagger();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

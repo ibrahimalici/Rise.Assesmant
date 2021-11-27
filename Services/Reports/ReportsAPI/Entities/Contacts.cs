@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,6 +12,6 @@ namespace ReportsAPI.Entities
         public string Soyad { get; set; }
         public string Firma { get; set; }
 
-        public List<ContactDetails> IletisimBilgileri = new List<ContactDetails>();
+        public List<ContactDetails> ContactSubDetails = new List<ContactDetails>();
     }
 }

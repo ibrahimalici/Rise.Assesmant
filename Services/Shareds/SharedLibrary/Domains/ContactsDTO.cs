@@ -13,6 +13,6 @@ namespace SharedLibrary.Domains
         public string Soyad { get; set; }
         public string Firma { get; set; }
 
-        public List<ContactDetailsDTO> IletisimBilgileri = new List<ContactDetailsDTO>();
+        public List<ContactDetailsDTO> ContactSubDetails = new List<ContactDetailsDTO>();
     }
 }
