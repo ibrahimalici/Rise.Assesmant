@@ -12,29 +12,29 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.ContactsInfo.Commands
 {
-    public class CreateKisiCommand : IRequest<Guid>
+    public class CreateContactCommand : IRequest<Guid>
     {
-        public string Ad { get; set; }
-        public string Soyad { get; set; }
-        public string Firma { get; set; }
+        public string Name { get; set; }
+        public string Surename { get; set; }
+        public string Company { get; set; }
     }
 
-    public class CreateKisiHandle : IRequestHandler<CreateKisiCommand, Guid>
+    public class CreateContactHandle : IRequestHandler<CreateContactCommand, Guid>
     {
         private readonly DatabaseContext db;
 
-        public CreateKisiHandle(DatabaseContext db)
+        public CreateContactHandle(DatabaseContext db)
         {
             this.db = db;
         }
 
-        public async Task<Guid> Handle(CreateKisiCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateContactCommand request, CancellationToken cancellationToken)
         {
             Contact data = new Contact
             {
-                Ad = request.Ad,
-                Soyad = request.Soyad,
-                Firma = request.Firma,
+                Ad = request.Name,
+                Soyad = request.Surename,
+                Firma = request.Company,
                 ContactId = Guid.NewGuid()
             };
             await db.Contacts.AddAsync(data);

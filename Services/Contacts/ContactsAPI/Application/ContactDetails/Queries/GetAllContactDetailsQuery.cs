@@ -12,41 +12,41 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.ContactSubDetails.Queries
 {
-    public class GetAllIletisimQuery : IRequest<List<ContactDetailsDTO>>
+    public class GetAllContactDetailsQuery : IRequest<List<ContactDetailDTO>>
     {
-        public Guid? KisiId { get; set; }
+        public Guid? ContactId { get; set; }
         public bool Paging { get; set; }
         public int StartIndex { get; set; }
         public int RecordCount { get; set; }
     }
 
-    public class GetAllIletisimHandle : IRequestHandler<GetAllIletisimQuery, List<ContactDetailsDTO>>
+    public class GetAllContactDetailHandle : IRequestHandler<GetAllContactDetailsQuery, List<ContactDetailDTO>>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
 
-        public GetAllIletisimHandle(DatabaseContext db, IMapper mapper)
+        public GetAllContactDetailHandle(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
         }
 
-        public async Task<List<ContactDetailsDTO>> Handle(GetAllIletisimQuery request, CancellationToken cancellationToken)
+        public async Task<List<ContactDetailDTO>> Handle(GetAllContactDetailsQuery request, CancellationToken cancellationToken)
         {
             List<ContactDetail> data = new List<ContactDetail>();
 
             if (!request.Paging)
                 data = db.ContactDetails.Include(o => o.Kisi)
-                    .Where(p => !request.KisiId.HasValue || request.KisiId.ToString().Contains("00000") || p.KisiId == request.KisiId.Value)
+                    .Where(p => !request.ContactId.HasValue || request.ContactId.ToString().Contains("00000") || p.KisiId == request.ContactId.Value)
                     .ToList();
             else
             {
                 data = db.ContactDetails.Include(o=>o.Kisi)
-                    .Where(p=> !request.KisiId.HasValue || request.KisiId.ToString().Contains("00000") || p.KisiId == request.KisiId.Value)
+                    .Where(p=> !request.ContactId.HasValue || request.ContactId.ToString().Contains("00000") || p.KisiId == request.ContactId.Value)
                     .Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 
-            List<ContactDetailsDTO> result = mapper.Map<List<ContactDetailsDTO>>(data);
+            List<ContactDetailDTO> result = mapper.Map<List<ContactDetailDTO>>(data);
             return result;
         }
     }

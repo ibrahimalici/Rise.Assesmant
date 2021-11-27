@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharedLibrary.Domains
+﻿namespace SharedLibrary.Domains
 {
     public enum ContactDetailType
     {
-        TelNo = 1,
+        PhoneNumber = 1,
         Email = 2,
-        Konum = 3
+        Location = 3
     }
 
     public enum ReportStatus
     {
-        Hazirlaniyor = 1,
-        Tamamlandi = 2
+        Preparing = 1,
+        Ready = 2
     }
 }

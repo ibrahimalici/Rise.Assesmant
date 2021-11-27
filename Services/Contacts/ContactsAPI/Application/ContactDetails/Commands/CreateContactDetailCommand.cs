@@ -11,30 +11,30 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.ContactSubDetails.Commands
 {
-    public class CreateIletisimCommand : IRequest<Guid>
+    public class CreateContactDetailCommand : IRequest<Guid>
     {
-        public ContactDetailType BilgiTipi { get; set; }
-        public string BilgiIcerigi { get; set; }
-        public Guid KisiId { get; set; }
+        public ContactDetailType ContactDetailType { get; set; }
+        public string Description { get; set; }
+        public Guid ContactId { get; set; }
     }
 
-    public class CreateIletisimHandle : IRequestHandler<CreateIletisimCommand, Guid>
+    public class CreateContactDetailHandle : IRequestHandler<CreateContactDetailCommand, Guid>
     {
         private readonly DatabaseContext db;
 
-        public CreateIletisimHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
+        public CreateContactDetailHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
         {
             this.db = db;
         }
 
-        public async Task<Guid> Handle(CreateIletisimCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateContactDetailCommand request, CancellationToken cancellationToken)
         {
             ContactDetail data = new ContactDetail
             {
                 ContactDetailId= Guid.NewGuid(),
-                KisiId = request.KisiId,
-                BilgiTipi = request.BilgiTipi,
-                BilgiIcerigi = request.BilgiIcerigi
+                KisiId = request.ContactId,
+                BilgiTipi = request.ContactDetailType,
+                BilgiIcerigi = request.Description
             };
             await db.ContactDetails.AddAsync(data);
             await db.SaveChangesAsync();

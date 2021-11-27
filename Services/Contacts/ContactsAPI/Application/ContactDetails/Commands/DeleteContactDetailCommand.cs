@@ -12,23 +12,23 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.ContactSubDetails.Commands
 {
-    public class DeleteIletisimCommand : IRequest<bool>
+    public class DeleteContactDetailCommand : IRequest<bool>
     {
-        public Guid IletisimId { get; set; }
+        public Guid ContactDetailId { get; set; }
     }
 
-    public class DeleteIletisimHandle : IRequestHandler<DeleteIletisimCommand, bool>
+    public class DeleteContactDetailHandle : IRequestHandler<DeleteContactDetailCommand, bool>
     {
         private readonly DatabaseContext db;
 
-        public DeleteIletisimHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
+        public DeleteContactDetailHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
         {
             this.db = db;
         }
 
-        public async Task<bool> Handle(DeleteIletisimCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteContactDetailCommand request, CancellationToken cancellationToken)
         {
-            ContactDetail saved = await db.ContactDetails.FindAsync(request.IletisimId);
+            ContactDetail saved = await db.ContactDetails.FindAsync(request.ContactDetailId);
             db.ContactDetails.Remove(saved);
             await db.SaveChangesAsync();
 

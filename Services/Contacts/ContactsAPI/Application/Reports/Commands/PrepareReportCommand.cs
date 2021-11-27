@@ -34,14 +34,14 @@ namespace ContactsAPI.Application.Reports.Commands
             Report report = new Report();
             report.ReportId = Guid.NewGuid();
             report.RaporTalepTarihi = DateTime.Now;
-            report.RaporDurumu = ReportStatus.Hazirlaniyor;
+            report.RaporDurumu = ReportStatus.Preparing;
             await db.Reports.AddAsync(report);
 
             ReportDTO messageObject = mapper.Map<ReportDTO>(report);
 
             var result1 = from p in db.ContactDetails
                           join q in db.Contacts on p.KisiId equals q.ContactId
-                          where p.BilgiTipi == ContactDetailType.Konum
+                          where p.BilgiTipi == ContactDetailType.Location
                           group p by p.BilgiIcerigi into grouped
                           select new
                           {
@@ -51,7 +51,7 @@ namespace ContactsAPI.Application.Reports.Commands
 
             var result2 = from p in db.ContactDetails
                           join q in db.ContactDetails on p.KisiId equals q.KisiId
-                          where p.BilgiTipi == ContactDetailType.Konum && q.BilgiTipi == ContactDetailType.TelNo
+                          where p.BilgiTipi == ContactDetailType.Location && q.BilgiTipi == ContactDetailType.PhoneNumber
                           group p by p.BilgiIcerigi into grouped
                           select new
                           {
@@ -75,7 +75,7 @@ namespace ContactsAPI.Application.Reports.Commands
             return new ReportDTO
             {
                 ReportId = messageObject.ReportId,
-                RaporDurumu = ReportStatus.Hazirlaniyor,
+                RaporDurumu = ReportStatus.Preparing,
                 RaporTalepTarihi = messageObject.RaporTalepTarihi
             };
         }

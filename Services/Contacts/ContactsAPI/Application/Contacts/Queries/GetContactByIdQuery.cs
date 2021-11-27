@@ -10,26 +10,26 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.ContactsInfo.Queries
 {
-    public class GetKisiByIdQuery : IRequest<ContactsDTO>
+    public class GetContactByIdQuery : IRequest<ContactDTO>
     {
-        public Guid KisiId { get; set; }
+        public Guid ContactId { get; set; }
     }
 
-    public class GetKisiByIdHandle : IRequestHandler<GetKisiByIdQuery, ContactsDTO>
+    public class GetContactByIdHandle : IRequestHandler<GetContactByIdQuery, ContactDTO>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
 
-        public GetKisiByIdHandle(DatabaseContext db, IMapper mapper)
+        public GetContactByIdHandle(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
         }
 
-        public async Task<ContactsDTO> Handle(GetKisiByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ContactDTO> Handle(GetContactByIdQuery request, CancellationToken cancellationToken)
         {
-            Contact kisi = await db.Contacts.FindAsync(request.KisiId);
-            ContactsDTO result = mapper.Map<ContactsDTO>(kisi);
+            Contact kisi = await db.Contacts.FindAsync(request.ContactId);
+            ContactDTO result = mapper.Map<ContactDTO>(kisi);
             return result;
         }
     }

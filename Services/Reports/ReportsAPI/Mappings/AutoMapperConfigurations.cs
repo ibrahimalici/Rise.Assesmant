@@ -6,8 +6,8 @@ namespace ReportsAPI.Mappings
     {
         public AutoMapperConfigurations()
         {
-            CreateMap<ReportsAPI.Entities.ContactDetails, SharedLibrary.Domains.ContactDetailsDTO>();
-            CreateMap<ReportsAPI.Entities.Contacts, SharedLibrary.Domains.ContactsDTO>();
+            CreateMap<ReportsAPI.Entities.ContactDetail, SharedLibrary.Domains.ContactDetailDTO>();
+            CreateMap<ReportsAPI.Entities.Contact, SharedLibrary.Domains.ContactDTO>();
             CreateMap<ReportsAPI.Entities.Report, SharedLibrary.Domains.ReportDTO>().ReverseMap();
             CreateMap<ReportsAPI.Entities.ReportDetail, SharedLibrary.Domains.ReportDetailDTO>().ReverseMap();
         }

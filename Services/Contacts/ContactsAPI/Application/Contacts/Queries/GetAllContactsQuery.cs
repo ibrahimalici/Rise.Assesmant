@@ -11,25 +11,25 @@ using System.Linq;
 
 namespace ContactsAPI.Application.ContactsInfo.Queries
 {
-    public class GetAllKisilerQuery : IRequest<List<ContactsDTO>>
+    public class GetAllContactsQuery : IRequest<List<ContactDTO>>
     {
         public bool Paging { get; set; }
         public int StartIndex { get; set; }
         public int RecordCount { get; set; }
     }
 
-    public class GetAllKisilerHandle : IRequestHandler<GetAllKisilerQuery, List<ContactsDTO>>
+    public class GetAllContactsHandle : IRequestHandler<GetAllContactsQuery, List<ContactDTO>>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
 
-        public GetAllKisilerHandle(DatabaseContext db, IMapper mapper)
+        public GetAllContactsHandle(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
         }
 
-        public async Task<List<ContactsDTO>> Handle(GetAllKisilerQuery request, CancellationToken cancellationToken)
+        public async Task<List<ContactDTO>> Handle(GetAllContactsQuery request, CancellationToken cancellationToken)
         {
             List<Contact> data = new List<Contact>();
 
@@ -40,7 +40,7 @@ namespace ContactsAPI.Application.ContactsInfo.Queries
                 data = db.Contacts.Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 
-            List<ContactsDTO> result = mapper.Map<List<ContactsDTO>>(data);
+            List<ContactDTO> result = mapper.Map<List<ContactDTO>>(data);
             return result;
         }
     }

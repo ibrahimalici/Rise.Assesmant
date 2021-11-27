@@ -24,26 +24,26 @@ namespace ContactsAPI.Controllers
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
 
-            var result = await mediator.Send(new GetIletisimByIdQuery { IletisimId = id });
+            var result = await mediator.Send(new GetContactDetailByIdQuery { ContactDetailId = id });
             return Ok(result);
         }
 
         [HttpPost("GetAll")]
-        public async Task<IActionResult> GetAll([FromBody] GetAllIletisimQuery req)
+        public async Task<IActionResult> GetAll([FromBody] GetAllContactDetailsQuery req)
         {
             var result = await mediator.Send(req);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]CreateIletisimCommand command)
+        public async Task<IActionResult> Post([FromBody]CreateContactDetailCommand command)
         {
             Guid result = await mediator.Send(command);
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]UpdateIletisimCommand command)
+        public async Task<IActionResult> Put([FromBody]UpdateContactDetailCommand command)
         {
             bool result = await mediator.Send(command);
             return Ok(result);
@@ -52,7 +52,7 @@ namespace ContactsAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
-            bool result = await mediator.Send(new DeleteIletisimCommand { IletisimId = id });
+            bool result = await mediator.Send(new DeleteContactDetailCommand { ContactDetailId = id });
             return Ok(result);
         }
     }

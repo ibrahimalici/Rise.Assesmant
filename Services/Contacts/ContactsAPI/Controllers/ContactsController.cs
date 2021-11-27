@@ -23,26 +23,26 @@ namespace ContactsAPI.Controllers
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
 
-            var result = await mediator.Send(new GetKisiByIdQuery { KisiId = id });
+            var result = await mediator.Send(new GetContactByIdQuery { ContactId = id });
             return Ok(result);
         }
 
         [HttpPost("GetAll")]
-        public async Task<IActionResult> GetAll([FromBody] GetAllKisilerQuery req)
+        public async Task<IActionResult> GetAll([FromBody] GetAllContactsQuery req)
         {
             var result = await mediator.Send(req);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateKisiCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateContactCommand command)
         {
             Guid result = await mediator.Send(command);
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateKisiCommand command)
+        public async Task<IActionResult> Put([FromBody] UpdateContactCommand command)
         {
             bool result = await mediator.Send(command);
             return Ok(result);
@@ -51,7 +51,7 @@ namespace ContactsAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
-            bool result = await mediator.Send(new DeleteKisiCommand { KisiId = id });
+            bool result = await mediator.Send(new DeleteContactCommand { KisiId = id });
             return Ok(result);
         }
 

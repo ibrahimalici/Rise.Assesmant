@@ -6,8 +6,8 @@ namespace ReportsAPI.Entities
     {
         public Guid ReportDetailId { get; set; }
         public Guid ReportId { get; set; }
-        public string KonumBilgisi { get; set; }
-        public int KisiSayisi { get; set; }
-        public int TelSayisi { get; set; }
+        public string Location { get; set; }
+        public int ContactCount { get; set; }
+        public int PhoneCount { get; set; }
     }
 }

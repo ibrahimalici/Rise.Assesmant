@@ -12,15 +12,15 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.ContactsInfo.Commands
 {
-    public class UpdateKisiCommand : IRequest<bool>
+    public class UpdateContactCommand : IRequest<bool>
     {
-        public Guid Id { get; set; }
-        public string Ad { get; set; }
-        public string Soyad { get; set; }
-        public string Firma { get; set; }
+        public Guid ContactId { get; set; }
+        public string Name { get; set; }
+        public string Surename { get; set; }
+        public string Company { get; set; }
     }
 
-    public class UpdateKisiHandle : IRequestHandler<UpdateKisiCommand, bool>
+    public class UpdateKisiHandle : IRequestHandler<UpdateContactCommand, bool>
     {
         private readonly DatabaseContext db;
 
@@ -29,13 +29,13 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
             this.db = db;
         }
 
-        public async Task<bool> Handle(UpdateKisiCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateContactCommand request, CancellationToken cancellationToken)
         {
-            Contact saved = await db.Contacts.FindAsync(request.Id);
+            Contact saved = await db.Contacts.FindAsync(request.ContactId);
 
-            saved.Ad = request.Ad;
-            saved.Firma =request.Firma;
-            saved.Soyad =request.Soyad;
+            saved.Ad = request.Name;
+            saved.Firma =request.Company;
+            saved.Soyad =request.Surename;
             await db.SaveChangesAsync();
 
             return true;

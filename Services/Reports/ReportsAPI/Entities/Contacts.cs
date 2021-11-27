@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ReportsAPI.Entities
 {
-    public class Contacts : BaseEntity
+    public class Contact : BaseEntity
     {
         public Guid ContactId { get; set; }
-        public string Ad { get; set; }
-        public string Soyad { get; set; }
-        public string Firma { get; set; }
+        public string Name { get; set; }
+        public string Surename { get; set; }
+        public string Company { get; set; }
 
-        public List<ContactDetails> ContactSubDetails = new List<ContactDetails>();
+        public List<ContactDetail> ContactSubDetails = new List<ContactDetail>();
     }
 }

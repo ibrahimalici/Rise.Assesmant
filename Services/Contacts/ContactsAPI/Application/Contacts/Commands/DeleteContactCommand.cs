@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.ContactsInfo.Commands
 {
-    public class DeleteKisiCommand : IRequest<bool>
+    public class DeleteContactCommand : IRequest<bool>
     {
         public Guid KisiId { get; set; }
     }
 
-    public class DeleteKisiHandle : IRequestHandler<DeleteKisiCommand, bool>
+    public class DeleteContactHandle : IRequestHandler<DeleteContactCommand, bool>
     {
         private readonly DatabaseContext db;
 
-        public DeleteKisiHandle(DatabaseContext db)
+        public DeleteContactHandle(DatabaseContext db)
         {
             this.db = db;
         }
 
-        public async Task<bool> Handle(DeleteKisiCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
         {
             Contact saved = await db.Contacts.FindAsync(request.KisiId);
             db.Contacts.Remove(saved);
