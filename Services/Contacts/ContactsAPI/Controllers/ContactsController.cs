@@ -55,7 +55,7 @@ namespace ContactsAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("PrepareReport")]
         public async Task<IActionResult> PrepareReport()
         {
             var result = await mediator.Send(new PrepareReportCommand());

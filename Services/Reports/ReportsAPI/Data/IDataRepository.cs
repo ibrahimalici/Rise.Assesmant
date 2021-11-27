@@ -7,7 +7,9 @@ namespace ReportsAPI.Data
 {
     public interface IDataRepository
     {
-        Task<ReportDTO> GetReportObject();
+        List<ReportDTO> GetAllReportObjects();
+
+        Task<ReportDTO> GetReportObject(Guid Id);
 
         Task<bool> PrepareReport(ReportDTO report);
     }

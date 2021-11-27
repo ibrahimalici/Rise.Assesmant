@@ -9,7 +9,7 @@ namespace ContactsAPI.Entities
     public class Report
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid ReportId { get; set; }
         public DateTime RaporTalepTarihi { get; set; }
         public ReportStatus RaporDurumu { get; set; }
     }
@@ -18,7 +18,7 @@ namespace ContactsAPI.Entities
     {
         public void Configure(EntityTypeBuilder<Report> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.ReportId);
             builder.Property(x => x.RaporDurumu).IsRequired();
             builder.Property(x=>x.RaporTalepTarihi).IsRequired();
         }

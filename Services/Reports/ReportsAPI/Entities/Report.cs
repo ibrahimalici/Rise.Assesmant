@@ -6,7 +6,7 @@ namespace ReportsAPI.Entities
 {
     public class Report : BaseEntity
     {
-        public Guid Id { get; set; }
+        public Guid ReportId { get; set; }
         public DateTime RaporTalepTarihi { get; set; }
         public ReportStatus RaporDurumu { get; set; }
         public List<ReportDetailDTO> Reports { get; }

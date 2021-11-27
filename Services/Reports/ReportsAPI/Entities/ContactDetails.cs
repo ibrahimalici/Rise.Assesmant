@@ -4,12 +4,12 @@ using System;
 
 namespace ReportsAPI.Entities
 {
-    public class Iletisim : BaseEntity
+    public class ContactDetails : BaseEntity
     {
-        public Guid Id { get; set; }
+        public Guid ContactDetailId { get; set; }
         public ContactDetailType BilgiTipi { get; set; }
         public string BilgiIcerigi { get; set; }
         public Guid KisiId { get; set; }
-        public Kisi Kisi { get; set; }
+        public Contacts Kisi { get; set; }
     }
 }

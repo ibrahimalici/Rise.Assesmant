@@ -39,7 +39,7 @@ namespace ReportsAPI
                         h.Password(queePass);
                     });
 
-                    cfg.ReceiveEndpoint("report-integration", e =>
+                    cfg.ReceiveEndpoint("queue:report-integration", e =>
                     {
                         e.ConfigureConsumer<ReportMessageConsumer>(context);
                     });
@@ -48,7 +48,7 @@ namespace ReportsAPI
 
             services.AddMassTransitHostedService();
 
-            services.AddScoped<IDataRepository, DataRepository>();
+            services.AddTransient<IDataRepository, DataRepository>();
             services.AddAutoMapper(config =>
             {
                 config.AddProfile(new AutoMapperConfigurations());

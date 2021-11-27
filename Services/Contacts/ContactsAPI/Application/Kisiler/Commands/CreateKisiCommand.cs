@@ -35,12 +35,12 @@ namespace ContactsAPI.Application.Kisiler.Commands
                 Ad = request.Ad,
                 Soyad = request.Soyad,
                 Firma = request.Firma,
-                Id = Guid.NewGuid()
+                ContactId = Guid.NewGuid()
             };
             await db.Contacts.AddAsync(data);
             await db.SaveChangesAsync();
 
-            return data.Id;
+            return data.ContactId;
         }
     }
 }

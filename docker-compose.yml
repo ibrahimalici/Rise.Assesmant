@@ -31,6 +31,9 @@ volumes:
   mongo-reports-volume:
    name: mongo-reports-volume
    external: false
+  mongo-reports-volume-config:
+   name: mongo-reports-volume-config
+   external: false
   rabbitmq-volume:
    name: rabbitmq-volume
    external: false

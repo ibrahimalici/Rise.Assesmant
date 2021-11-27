@@ -28,7 +28,7 @@ namespace ContactsAPI.Application.IletisimBilgileri.Queries
 
         public async Task<ContactDetailsDTO> Handle(GetIletisimByIdQuery request, CancellationToken cancellationToken)
         {
-            ContactDetail Iletisim = await db.ContactDetails.Include(o => o.Kisi).FirstOrDefaultAsync(x=>x.Id == request.IletisimId);
+            ContactDetail Iletisim = await db.ContactDetails.Include(o => o.Kisi).FirstOrDefaultAsync(x=>x.ContactDetailId == request.IletisimId);
             ContactDetailsDTO result = mapper.Map<ContactDetailsDTO>(Iletisim);
             return result;
         }

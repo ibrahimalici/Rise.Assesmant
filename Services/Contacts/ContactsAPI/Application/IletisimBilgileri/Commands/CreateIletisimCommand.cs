@@ -31,14 +31,14 @@ namespace ContactsAPI.Application.IletisimBilgileri.Commands
         {
             ContactDetail data = new ContactDetail
             {
-                Id= Guid.NewGuid(),
+                ContactDetailId= Guid.NewGuid(),
                 KisiId = request.KisiId,
                 BilgiTipi = request.BilgiTipi,
                 BilgiIcerigi = request.BilgiIcerigi
             };
             await db.ContactDetails.AddAsync(data);
             await db.SaveChangesAsync();
-            return data.Id;
+            return data.ContactDetailId;
         }
     }
 }

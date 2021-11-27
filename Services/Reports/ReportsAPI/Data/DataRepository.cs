@@ -21,6 +21,8 @@ namespace ReportsAPI.Repositories
 
         public DataRepository(IConfiguration configuration, IMapper mapper)
         {
+            this.Configuration = configuration;
+
             string mongoCnn = Configuration.GetValue<string>("DatabaseSettings:MongoConnectionString");
             string mongoProductDb = Configuration.GetValue<string>("DatabaseSettings:MongoContactsDB");
             string mongoProductsTable = Configuration.GetValue<string>("DatabaseSettings:MongoContactsTable");
@@ -31,17 +33,24 @@ namespace ReportsAPI.Repositories
             this.mapper = mapper;
         }
 
-        public async Task<ReportDTO> GetReportObject()
+        public async Task<ReportDTO> GetReportObject(Guid id)
         {
-            Report report = await reportTable.AsQueryable().FirstOrDefaultAsync();
+            Report report = reportTable.AsQueryable().Where(o => o.ReportId == id).FirstOrDefault();
             ReportDTO result = mapper.Map<ReportDTO>(report);
+            return result;
+        }
+
+        public List<ReportDTO> GetAllReportObjects()
+        {
+            List<Report> reports = reportTable.Find(_ => true).ToList();
+            List<ReportDTO> result = mapper.Map<List<ReportDTO>>(reports);
             return result;
         }
 
         public async Task<bool> PrepareReport(ReportDTO report)
         {
             var new_ = mapper.Map<Report>(report);
-            await reportTable.ReplaceOneAsync(o => o.Id == new_.Id, new_);
+            await reportTable.ReplaceOneAsync(o => o.ReportId == new_.ReportId, new_);
             return true;
         }
     }

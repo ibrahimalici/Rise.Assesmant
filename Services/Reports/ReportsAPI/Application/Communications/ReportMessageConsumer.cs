@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using ReportsAPI.Repositories;
+using ReportsAPI.Data;
 using SharedLibrary.Messages;
 using System.Threading.Tasks;
 
@@ -7,9 +7,9 @@ namespace ReportsAPI.Application.Communications
 {
     public class ReportMessageConsumer : IConsumer<ReportMessage>
     {
-        private readonly DataRepository db;
+        private readonly IDataRepository db;
 
-        public ReportMessageConsumer(DataRepository db)
+        public ReportMessageConsumer(IDataRepository db)
         {
             this.db = db;
         }

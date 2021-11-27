@@ -8,7 +8,7 @@ namespace SharedLibrary.Domains
 {
     public class ContactDetailsDTO
     {
-        public Guid Id { get; set; }
+        public Guid ContactDetailId { get; set; }
         public ContactDetailType BilgiTipi { get; set; }
         public string BilgiIcerigi { get; set; }
         public Guid KisiId { get; set; }

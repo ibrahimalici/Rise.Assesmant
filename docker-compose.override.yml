@@ -22,7 +22,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: azx1234
     volumes:
      - mongo-reports-volume:/data/db
-     - mongo-reports-volume:/data/config/db
+     - mongo-reports-volume-config:/data/config/db
     ports:
      - "27017:27017"
 
@@ -36,7 +36,7 @@ services:
       - rabbitmq-volume:/var/lib/rabbitmq/
 
   apigateway:
-    container_name: tesodev_gateway
+    container_name: apigateway
     image: ${DOCKER_REGISTRY-}apigateway
     restart: unless-stopped
     build:
@@ -56,6 +56,11 @@ services:
     build:
       context: .
       dockerfile: Services/Contacts/ContactsAPI/Dockerfile
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Development"
+      - "Scheme=http"
+      - "ServiceHost=contactsapi"
+      - "ServicePort=80"
     ports:
       - "8080:80"
       - "56849:443"
@@ -64,6 +69,11 @@ services:
     build:
       context: .
       dockerfile: Services/Reports/ReportsAPI/Dockerfile
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Development"
+      - "Scheme=http"
+      - "ServiceHost=reportsapi"
+      - "ServicePort=80"
     ports:
       - "8081:80"
       - "56850:443"

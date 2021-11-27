@@ -32,7 +32,7 @@ namespace ContactsAPI.Application.Reports.Commands
         public async Task<ReportDTO> Handle(PrepareReportCommand request, CancellationToken cancellationToken)
         {
             Report report = new Report();
-            report.Id = Guid.NewGuid();
+            report.ReportId = Guid.NewGuid();
             report.RaporTalepTarihi = DateTime.Now;
             report.RaporDurumu = ReportStatus.Hazirlaniyor;
             await db.Reports.AddAsync(report);
@@ -40,7 +40,7 @@ namespace ContactsAPI.Application.Reports.Commands
             ReportDTO messageObject = mapper.Map<ReportDTO>(report);
 
             var result1 = from p in db.ContactDetails
-                          join q in db.Contacts on p.KisiId equals q.Id
+                          join q in db.Contacts on p.KisiId equals q.ContactId
                           where p.BilgiTipi == ContactDetailType.Konum
                           group p by p.BilgiIcerigi into grouped
                           select new
@@ -74,7 +74,7 @@ namespace ContactsAPI.Application.Reports.Commands
 
             return new ReportDTO
             {
-                Id = messageObject.Id,
+                ReportId = messageObject.ReportId,
                 RaporDurumu = ReportStatus.Hazirlaniyor,
                 RaporTalepTarihi = messageObject.RaporTalepTarihi
             };

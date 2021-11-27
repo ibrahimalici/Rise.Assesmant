@@ -10,8 +10,9 @@
           "Port": "80"
         }
       ],
-      "UpstreamPathTemplate": "/Contacts/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/api/Contacts/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "contacts"
     },
     {
       "DownstreamPathTemplate": "/api/v1/ContactsDetailsAPI/{everything}",
@@ -24,20 +25,44 @@
         }
       ],
       "UpstreamPathTemplate": "/ContactsDetails/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "contacts"
     },
     {
-      "DownstreamPathTemplate": "/ReportsAPI/{everything}",
+      "DownstreamPathTemplate": "/api/v1/ReportsAPI/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "ordersapi",
+          "Host": "reportsapi",
           //"Host": "localhost",
           "Port": "80"
         }
       ],
-      "UpstreamPathTemplate": "/Reports/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/api/Reports/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "reports"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "contacts",
+      "Config": [
+        {
+          "Name": "Contacts API",
+          "Version": "v1",
+          "Url": "https://localhost:56849/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "reports",
+      "Config": [
+        {
+          "Name": "Reports API",
+          "Version": "v1",
+          "Url": "http://localhost:8081/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }
