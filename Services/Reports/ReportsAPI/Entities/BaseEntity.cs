@@ -7,6 +7,6 @@ namespace ReportsAPI.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id_Origin { get; set; } = ObjectId.GenerateNewId().ToString();
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
     }
 }
