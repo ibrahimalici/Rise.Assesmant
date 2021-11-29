@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Rise.Assesment\Services\Contacts\ContactsAPI\ContactsAPI.csproj" />
+    <ProjectReference Include="..\..\..\Services\Contacts\ContactsAPI\ContactsAPI.csproj" />
   </ItemGroup>
 
 </Project>
