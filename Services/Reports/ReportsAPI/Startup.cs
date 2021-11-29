@@ -39,7 +39,7 @@ namespace ReportsAPI
                         h.Password(queePass);
                     });
 
-                    cfg.ReceiveEndpoint("queue:report-integration", e =>
+                    cfg.ReceiveEndpoint("report-prepare", e =>
                     {
                         e.ConfigureConsumer<ReportMessageConsumer>(context);
                     });

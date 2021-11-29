@@ -1,4 +1,5 @@
-﻿using ContactsAPI.Application.ContactsInfo.Commands;
+﻿using ContactsAPI.Application.Communications;
+using ContactsAPI.Application.ContactsInfo.Commands;
 using ContactsAPI.Application.ContactsInfo.Queries;
 using ContactsAPI.Application.Reports.Commands;
 using MediatR;
@@ -13,10 +14,12 @@ namespace ContactsAPI.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly IMassTransitHelper massTransitHelper;
 
-        public ContactsController(IMediator mediator)
+        public ContactsController(IMediator mediator, IMassTransitHelper massTransitHelper)
         {
             this.mediator = mediator;
+            this.massTransitHelper = massTransitHelper;
         }
 
         [HttpGet("{id}")]
@@ -59,6 +62,7 @@ namespace ContactsAPI.Controllers
         public async Task<IActionResult> PrepareReport()
         {
             var result = await mediator.Send(new PrepareReportCommand());
+            await massTransitHelper.PrepareReport(result);
             return Ok(result);
         }
     }

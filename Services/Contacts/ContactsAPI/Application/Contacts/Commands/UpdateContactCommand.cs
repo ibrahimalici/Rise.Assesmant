@@ -24,7 +24,7 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
     {
         private readonly DatabaseContext db;
 
-        public UpdateKisiHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
+        public UpdateKisiHandle(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
         }

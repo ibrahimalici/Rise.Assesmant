@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SharedLibrary.Messages;
+using System;
 
 namespace ContactsAPI
 {
@@ -40,6 +42,14 @@ namespace ContactsAPI
                           h.Username(queeUserName);
                           h.Password(queePass);
                       });
+
+                    cfg.ReceiveEndpoint("queue:report-prepare", c =>
+                    {
+                        c.Handler<ReportMessage>(ctx =>
+                        {
+                            return Console.Out.WriteLineAsync("Mesaj Gönderildi");
+                        });
+                    });
                 });
             });
 
@@ -55,7 +65,7 @@ namespace ContactsAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactsAPI", Version = "v1" });
             });
-            services.AddScoped<MassTransitHelper>();
+            services.AddScoped<IMassTransitHelper, MassTransitHelper>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)

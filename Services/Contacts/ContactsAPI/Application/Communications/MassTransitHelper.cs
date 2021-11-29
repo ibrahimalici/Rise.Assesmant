@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace ContactsAPI.Application.Communications
 {
-    public class MassTransitHelper
+    public class MassTransitHelper : IMassTransitHelper
     {
-        private readonly ISendEndpointProvider provider;
+        private readonly IPublishEndpoint endpoint;
 
-        public MassTransitHelper(ISendEndpointProvider provider)
+        public MassTransitHelper(IPublishEndpoint endpoint)
         {
-            this.provider = provider;
+            this.endpoint = endpoint;
         }
 
         public async Task PrepareReport(ReportDTO report)
         {
-            var endPoint = await provider.GetSendEndpoint(new Uri("queue:report-integration"));
-            await endPoint.Send(report);
+            await endpoint.Publish<ReportMessage>(report);
         }
     }
 }

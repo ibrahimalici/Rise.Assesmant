@@ -23,7 +23,7 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
     {
         private readonly DatabaseContext db;
 
-        public UpdateContactDetailHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
+        public UpdateContactDetailHandle(DatabaseContext db)
         {
             this.db = db;
         }

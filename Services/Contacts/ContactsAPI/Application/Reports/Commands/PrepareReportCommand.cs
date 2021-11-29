@@ -20,13 +20,11 @@ namespace ContactsAPI.Application.Reports.Commands
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
-        private readonly MassTransitHelper massTransitHelper;
 
-        public PrepareReportHandle(DatabaseContext db, IMapper mapper, MassTransitHelper massTransitHelper)
+        public PrepareReportHandle(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
-            this.massTransitHelper = massTransitHelper;
         }
 
         public async Task<ReportDTO> Handle(PrepareReportCommand request, CancellationToken cancellationToken)
@@ -69,8 +67,6 @@ namespace ContactsAPI.Application.Reports.Commands
                                             }).ToList();
 
             messageObject.Reports = new List<ReportDetailDTO>();
-
-            await massTransitHelper.PrepareReport(messageObject);
 
             return new ReportDTO
             {

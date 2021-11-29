@@ -22,7 +22,7 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
     {
         private readonly DatabaseContext db;
 
-        public CreateContactDetailHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
+        public CreateContactDetailHandle(DatabaseContext db)
         {
             this.db = db;
         }

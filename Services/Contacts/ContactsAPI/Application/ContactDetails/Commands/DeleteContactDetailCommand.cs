@@ -21,7 +21,7 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
     {
         private readonly DatabaseContext db;
 
-        public DeleteContactDetailHandle(DatabaseContext db, MassTransitHelper queueHelper, IMapper mapper)
+        public DeleteContactDetailHandle(DatabaseContext db)
         {
             this.db = db;
         }
