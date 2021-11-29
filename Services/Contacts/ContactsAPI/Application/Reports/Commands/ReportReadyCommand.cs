@@ -12,7 +12,7 @@ namespace ContactsAPI.Application.Reports.Commands
         public Guid ReportId { get; set; }
     }
 
-    public class ReportReadyCommandHandler :IRequestHandler<ReportReadyCommand,bool>
+    public class ReportReadyCommandHandler : IRequestHandler<ReportReadyCommand, bool>
     {
         private readonly DatabaseContext db;
 
@@ -24,8 +24,11 @@ namespace ContactsAPI.Application.Reports.Commands
         public async Task<bool> Handle(ReportReadyCommand request, CancellationToken cancellationToken)
         {
             Report report = await db.Reports.FindAsync(request.ReportId);
-            report.ReportStatus = SharedLibrary.Domains.ReportStatus.Ready;
-            await db.SaveChangesAsync();
+            if (report != null)
+            {
+                report.ReportStatus = SharedLibrary.Domains.ReportStatus.Ready;
+                await db.SaveChangesAsync();
+            }
             return true;
         }
     }

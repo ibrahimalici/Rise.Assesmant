@@ -43,6 +43,11 @@ namespace ContactsAPI
                           h.Password(queePass);
                       });
 
+                    cfg.ReceiveEndpoint("report-result", e =>
+                    {
+                        e.ConfigureConsumer<ReportResultMessageConsumer>(context);
+                    });
+
                     cfg.ReceiveEndpoint("queue:report-prepare", c =>
                     {
                         c.Handler<ReportMessage>(ctx =>

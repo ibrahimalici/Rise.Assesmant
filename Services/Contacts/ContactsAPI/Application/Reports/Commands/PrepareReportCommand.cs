@@ -36,6 +36,7 @@ namespace ContactsAPI.Application.Reports.Commands
             report.ReportDemandDateTime = DateTime.Now;
             report.ReportStatus = ReportStatus.Preparing;
             await db.Reports.AddAsync(report);
+            await db.SaveChangesAsync();
 
             ReportDTO messageObject = mapper.Map<ReportDTO>(report);
 

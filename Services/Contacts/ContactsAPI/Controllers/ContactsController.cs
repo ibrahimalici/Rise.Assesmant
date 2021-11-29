@@ -2,8 +2,10 @@
 using ContactsAPI.Application.ContactsInfo.Commands;
 using ContactsAPI.Application.ContactsInfo.Queries;
 using ContactsAPI.Application.Reports.Commands;
+using ContactsAPI.Application.ReportsInfo.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.Domains;
 using System;
 using System.Threading.Tasks;
 
@@ -61,6 +63,13 @@ namespace ContactsAPI.Controllers
         {
             var result = await mediator.Send(new PrepareReportCommand());
             result.Reports = null;
+            return Ok(result);
+        }
+
+        [HttpGet("GetAllReports")]
+        public async Task<IActionResult> GetPreparedReports()
+        {
+            var result = await mediator.Send(new GetAllReportQuery());
             return Ok(result);
         }
     }

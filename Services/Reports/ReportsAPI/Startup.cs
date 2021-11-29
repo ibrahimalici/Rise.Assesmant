@@ -9,6 +9,8 @@ using ReportsAPI.Application.Communications;
 using ReportsAPI.Data;
 using ReportsAPI.Mappings;
 using ReportsAPI.Repositories;
+using SharedLibrary.Messages;
+using System;
 
 namespace ReportsAPI
 {
@@ -42,6 +44,14 @@ namespace ReportsAPI
                     cfg.ReceiveEndpoint("report-prepare", e =>
                     {
                         e.ConfigureConsumer<ReportMessageConsumer>(context);
+                    });
+
+                    cfg.ReceiveEndpoint("queue:report-result", c =>
+                    {
+                        c.Handler<ReportResultMessage>(ctx =>
+                        {
+                            return Console.Out.WriteLineAsync("Mesaj Gönderildi");
+                        });
                     });
                 });
             });

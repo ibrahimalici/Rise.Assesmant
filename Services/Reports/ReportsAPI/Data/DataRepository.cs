@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using ReportsAPI.Data;
 using ReportsAPI.Entities;
 using SharedLibrary.Domains;
+using SharedLibrary.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +21,9 @@ namespace ReportsAPI.Repositories
         private readonly IMongoCollection<Report> reportTable = null;
         //private readonly IMongoCollection<ReportDetail> reportDetailTable = null;
         private readonly IMapper mapper = null;
+        private readonly IPublishEndpoint publishEndpoint= null;
 
-        public DataRepository(IConfiguration configuration, IMapper mapper)
+        public DataRepository(IConfiguration configuration, IMapper mapper, IPublishEndpoint endpoint)
         {
             this.Configuration = configuration;
 
@@ -34,6 +37,7 @@ namespace ReportsAPI.Repositories
             //reportDetailTable = database.GetCollection<ReportDetail>(mongoReportDetailsTable);
 
             this.mapper = mapper;
+            this.publishEndpoint = endpoint;
         }
 
         public async Task<ReportDTO> GetReportObject(Guid id)
@@ -54,6 +58,14 @@ namespace ReportsAPI.Repositories
         {
             var new_ = mapper.Map<Report>(report);
             await reportTable.InsertOneAsync(new_);
+
+            await publishEndpoint.Publish<ReportResultMessage>(new ReportResultMessage
+            {
+                ReportId = report.ReportId,
+                ResultMessage = "İşlem Başarılı",
+                ResultState = true
+            });
+
             return true;
         }
     }
