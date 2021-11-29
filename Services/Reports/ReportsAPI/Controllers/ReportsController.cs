@@ -25,10 +25,10 @@ namespace ReportsAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var result = db.GetAllReportObjects();
+            var result = await db.GetAllReportObjects();
             return Ok(result);
         }
     }

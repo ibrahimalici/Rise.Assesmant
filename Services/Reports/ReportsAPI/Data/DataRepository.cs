@@ -47,9 +47,9 @@ namespace ReportsAPI.Repositories
             return result;
         }
 
-        public List<ReportDTO> GetAllReportObjects()
+        public async Task<List<ReportDTO>> GetAllReportObjects()
         {
-            List<Report> reports = reportTable.AsQueryable().ToList();
+            List<Report> reports = await reportTable.AsQueryable().ToListAsync();
             List<ReportDTO> result = mapper.Map<List<ReportDTO>>(reports);
             return result;
         }

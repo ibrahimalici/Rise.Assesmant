@@ -29,6 +29,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsAPI.Test", "TestPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsDetailsAPI.Test", "TestProjects\Controllers\ContactsDetailsAPI.Test\ContactsDetailsAPI.Test.csproj", "{AEBC1A70-8990-40E2-8870-F8AE8D226DE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsAPI.Test", "TestProjects\Controllers\ReportsAPI.Test\ReportsAPI.Test.csproj", "{E9A2E988-F28C-4878-A047-F3C167A6A47D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MediatorRequestHandlers", "MediatorRequestHandlers", "{C7E20B4E-3AAE-4048-B791-F4AC3DDC6B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateContactDetailHandler.Test", "TestProjects\MediatorRequestHandlers\CreateContactDetailHandler.Test\CreateContactDetailHandler.Test.csproj", "{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +69,14 @@ Global
 		{AEBC1A70-8990-40E2-8870-F8AE8D226DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEBC1A70-8990-40E2-8870-F8AE8D226DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEBC1A70-8990-40E2-8870-F8AE8D226DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A2E988-F28C-4878-A047-F3C167A6A47D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A2E988-F28C-4878-A047-F3C167A6A47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A2E988-F28C-4878-A047-F3C167A6A47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A2E988-F28C-4878-A047-F3C167A6A47D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +91,9 @@ Global
 		{7D6C770D-5DE4-422C-9A10-F722862FED8A} = {F4CF1BA4-1D1E-469F-AA36-813AF63CEA17}
 		{8B4A02DC-B7B3-4DD1-B4DF-826236AB9CE9} = {7D6C770D-5DE4-422C-9A10-F722862FED8A}
 		{AEBC1A70-8990-40E2-8870-F8AE8D226DE0} = {7D6C770D-5DE4-422C-9A10-F722862FED8A}
+		{E9A2E988-F28C-4878-A047-F3C167A6A47D} = {7D6C770D-5DE4-422C-9A10-F722862FED8A}
+		{C7E20B4E-3AAE-4048-B791-F4AC3DDC6B05} = {F4CF1BA4-1D1E-469F-AA36-813AF63CEA17}
+		{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3} = {C7E20B4E-3AAE-4048-B791-F4AC3DDC6B05}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06D8BBD1-508A-407D-BC42-70A0156F7AA1}

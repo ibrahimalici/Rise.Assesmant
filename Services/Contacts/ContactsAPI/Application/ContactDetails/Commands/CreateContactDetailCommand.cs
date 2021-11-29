@@ -18,11 +18,11 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
         public Guid ContactId { get; set; }
     }
 
-    public class CreateContactDetailHandle : IRequestHandler<CreateContactDetailCommand, Guid>
+    public class CreateContactDetailHandler : IRequestHandler<CreateContactDetailCommand, Guid>
     {
         private readonly DatabaseContext db;
 
-        public CreateContactDetailHandle(DatabaseContext db)
+        public CreateContactDetailHandler(DatabaseContext db)
         {
             this.db = db;
         }
