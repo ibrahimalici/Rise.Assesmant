@@ -9,17 +9,16 @@ namespace SharedLibrary.Domains
     public class ReportDTO
     {
         public Guid ReportId { get; set; }
-        public DateTime RaporTalepTarihi { get; set; }
-        public ReportStatus RaporDurumu { get; set; }
+        public DateTime ReportDemandDateTime { get; set; }
+        public ReportStatus ReportStatus { get; set; }
         public List<ReportDetailDTO> Reports { get; set; }
     }
 
     public class ReportDetailDTO
     {
-        public Guid ReportDetailId { get; set; }
-        public Guid ReportId { get; set; }
-        public string KonumBilgisi { get; set; }
-        public int KisiSayisi { get; set; }
-        public int TelSayisi { get; set; }
+        public Guid ReportId { get; set;}
+        public string Location { get; set; }
+        public int ContactCount { get; set; }
+        public int PhoneCount { get; set; }
     }
 }

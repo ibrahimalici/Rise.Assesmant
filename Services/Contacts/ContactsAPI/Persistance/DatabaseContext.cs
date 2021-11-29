@@ -26,7 +26,7 @@ namespace ContactsAPI.Persistance
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new KisiConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactConfiguration());
             modelBuilder.ApplyConfiguration(new IletisimConfiguration());
             modelBuilder.ApplyConfiguration(new ReportConfiguration());
         }

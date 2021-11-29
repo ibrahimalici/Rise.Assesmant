@@ -32,8 +32,8 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
         {
             ContactDetail saved = await db.ContactDetails.FindAsync(request.ContactDetailId);
 
-            saved.BilgiTipi = request.ContactDetailType;
-            saved.BilgiIcerigi = request.Description;
+            saved.ContactDetailType = request.ContactDetailType;
+            saved.Description = request.Description;
             await db.SaveChangesAsync();
 
             return true;

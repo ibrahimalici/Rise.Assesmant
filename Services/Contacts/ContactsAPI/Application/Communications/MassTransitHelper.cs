@@ -17,7 +17,10 @@ namespace ContactsAPI.Application.Communications
 
         public async Task PrepareReport(ReportDTO report)
         {
-            await endpoint.Publish<ReportMessage>(report);
+            await endpoint.Publish<ReportMessage>(new ReportMessage
+            { 
+                Report = report 
+            });
         }
     }
 }

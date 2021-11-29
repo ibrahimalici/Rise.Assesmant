@@ -32,9 +32,9 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
             ContactDetail data = new ContactDetail
             {
                 ContactDetailId= Guid.NewGuid(),
-                KisiId = request.ContactId,
-                BilgiTipi = request.ContactDetailType,
-                BilgiIcerigi = request.Description
+                ContactId = request.ContactId,
+                ContactDetailType = request.ContactDetailType,
+                Description = request.Description
             };
             await db.ContactDetails.AddAsync(data);
             await db.SaveChangesAsync();

@@ -36,13 +36,13 @@ namespace ContactsAPI.Application.ContactSubDetails.Queries
             List<ContactDetail> data = new List<ContactDetail>();
 
             if (!request.Paging)
-                data = db.ContactDetails.Include(o => o.Kisi)
-                    .Where(p => !request.ContactId.HasValue || request.ContactId.ToString().Contains("00000") || p.KisiId == request.ContactId.Value)
+                data = db.ContactDetails.Include(o => o.Contact)
+                    .Where(p => !request.ContactId.HasValue || request.ContactId.ToString().Contains("00000") || p.ContactId == request.ContactId.Value)
                     .ToList();
             else
             {
-                data = db.ContactDetails.Include(o=>o.Kisi)
-                    .Where(p=> !request.ContactId.HasValue || request.ContactId.ToString().Contains("00000") || p.KisiId == request.ContactId.Value)
+                data = db.ContactDetails.Include(o=>o.Contact)
+                    .Where(p=> !request.ContactId.HasValue || request.ContactId.ToString().Contains("00000") || p.ContactId == request.ContactId.Value)
                     .Skip(request.StartIndex).Take(request.RecordCount).ToList();
             }
 

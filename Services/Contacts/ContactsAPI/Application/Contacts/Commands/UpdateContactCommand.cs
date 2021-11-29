@@ -33,9 +33,9 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
         {
             Contact saved = await db.Contacts.FindAsync(request.ContactId);
 
-            saved.Ad = request.Name;
-            saved.Firma =request.Company;
-            saved.Soyad =request.Surename;
+            saved.Name = request.Name;
+            saved.Company =request.Company;
+            saved.Surename =request.Surename;
             await db.SaveChangesAsync();
 
             return true;

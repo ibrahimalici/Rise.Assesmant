@@ -10,8 +10,8 @@ namespace ContactsAPI.Entities
     {
         [Key]
         public Guid ReportId { get; set; }
-        public DateTime RaporTalepTarihi { get; set; }
-        public ReportStatus RaporDurumu { get; set; }
+        public DateTime ReportDemandDateTime { get; set; }
+        public ReportStatus ReportStatus { get; set; }
     }
 
     public class ReportConfiguration : IEntityTypeConfiguration<Report>
@@ -19,8 +19,8 @@ namespace ContactsAPI.Entities
         public void Configure(EntityTypeBuilder<Report> builder)
         {
             builder.HasKey(x => x.ReportId);
-            builder.Property(x => x.RaporDurumu).IsRequired();
-            builder.Property(x=>x.RaporTalepTarihi).IsRequired();
+            builder.Property(x => x.ReportStatus).IsRequired();
+            builder.Property(x=>x.ReportDemandDateTime).IsRequired();
         }
     }
 }

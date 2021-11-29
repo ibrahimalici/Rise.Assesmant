@@ -14,12 +14,10 @@ namespace ContactsAPI.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly IMediator mediator;
-        private readonly IMassTransitHelper massTransitHelper;
 
-        public ContactsController(IMediator mediator, IMassTransitHelper massTransitHelper)
+        public ContactsController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.massTransitHelper = massTransitHelper;
         }
 
         [HttpGet("{id}")]
@@ -62,7 +60,7 @@ namespace ContactsAPI.Controllers
         public async Task<IActionResult> PrepareReport()
         {
             var result = await mediator.Send(new PrepareReportCommand());
-            await massTransitHelper.PrepareReport(result);
+            result.Reports = null;
             return Ok(result);
         }
     }

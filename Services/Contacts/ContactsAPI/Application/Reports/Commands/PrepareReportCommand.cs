@@ -9,6 +9,7 @@ using System.Linq;
 using AutoMapper;
 using System.Collections.Generic;
 using ContactsAPI.Application.Communications;
+using SharedLibrary.Messages;
 
 namespace ContactsAPI.Application.Reports.Commands
 {
@@ -20,27 +21,28 @@ namespace ContactsAPI.Application.Reports.Commands
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
-
-        public PrepareReportHandle(DatabaseContext db, IMapper mapper)
+        private readonly IMassTransitHelper integration;
+        public PrepareReportHandle(DatabaseContext db, IMapper mapper, IMassTransitHelper massTransitHelper)
         {
             this.db = db;
             this.mapper = mapper;
+            this.integration = massTransitHelper;
         }
 
         public async Task<ReportDTO> Handle(PrepareReportCommand request, CancellationToken cancellationToken)
         {
             Report report = new Report();
             report.ReportId = Guid.NewGuid();
-            report.RaporTalepTarihi = DateTime.Now;
-            report.RaporDurumu = ReportStatus.Preparing;
+            report.ReportDemandDateTime = DateTime.Now;
+            report.ReportStatus = ReportStatus.Preparing;
             await db.Reports.AddAsync(report);
 
             ReportDTO messageObject = mapper.Map<ReportDTO>(report);
 
             var result1 = from p in db.ContactDetails
-                          join q in db.Contacts on p.KisiId equals q.ContactId
-                          where p.BilgiTipi == ContactDetailType.Location
-                          group p by p.BilgiIcerigi into grouped
+                          join q in db.Contacts on p.ContactId equals q.ContactId
+                          where p.ContactDetailType == ContactDetailType.Location
+                          group p by p.Description into grouped
                           select new
                           {
                               grouped.Key,
@@ -48,9 +50,9 @@ namespace ContactsAPI.Application.Reports.Commands
                           };
 
             var result2 = from p in db.ContactDetails
-                          join q in db.ContactDetails on p.KisiId equals q.KisiId
-                          where p.BilgiTipi == ContactDetailType.Location && q.BilgiTipi == ContactDetailType.PhoneNumber
-                          group p by p.BilgiIcerigi into grouped
+                          join q in db.ContactDetails on p.ContactId equals q.ContactId
+                          where p.ContactDetailType == ContactDetailType.Location && q.ContactDetailType == ContactDetailType.PhoneNumber
+                          group p by p.Description into grouped
                           select new
                           {
                               grouped.Key,
@@ -61,19 +63,17 @@ namespace ContactsAPI.Application.Reports.Commands
                                             join q in result2 on p.Key equals q.Key
                                             select new ReportDetailDTO
                                             {
-                                                KonumBilgisi = p.Key,
-                                                KisiSayisi = p.kisiSayisi,
-                                                TelSayisi = q.telSayisi
+                                                Location = p.Key,
+                                                ContactCount = p.kisiSayisi,
+                                                PhoneCount = q.telSayisi,
+                                                ReportId = report.ReportId
                                             }).ToList();
 
-            messageObject.Reports = new List<ReportDetailDTO>();
+            messageObject.Reports = result;
+            await integration.PrepareReport(messageObject);
 
-            return new ReportDTO
-            {
-                ReportId = messageObject.ReportId,
-                RaporDurumu = ReportStatus.Preparing,
-                RaporTalepTarihi = messageObject.RaporTalepTarihi
-            };
+            ReportDTO reportMain = mapper.Map<ReportDTO>(report);
+            return reportMain;
         }
     }
 }

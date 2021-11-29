@@ -32,9 +32,9 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
         {
             Contact data = new Contact
             {
-                Ad = request.Name,
-                Soyad = request.Surename,
-                Firma = request.Company,
+                Name = request.Name,
+                Surename = request.Surename,
+                Company = request.Company,
                 ContactId = Guid.NewGuid()
             };
             await db.Contacts.AddAsync(data);

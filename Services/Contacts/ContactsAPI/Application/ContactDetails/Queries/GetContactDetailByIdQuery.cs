@@ -28,7 +28,7 @@ namespace ContactsAPI.Application.ContactSubDetails.Queries
 
         public async Task<ContactDetailDTO> Handle(GetContactDetailByIdQuery request, CancellationToken cancellationToken)
         {
-            ContactDetail Iletisim = await db.ContactDetails.Include(o => o.Kisi).FirstOrDefaultAsync(x=>x.ContactDetailId == request.ContactDetailId);
+            ContactDetail Iletisim = await db.ContactDetails.Include(o => o.Contact).FirstOrDefaultAsync(x=>x.ContactDetailId == request.ContactDetailId);
             ContactDetailDTO result = mapper.Map<ContactDetailDTO>(Iletisim);
             return result;
         }
