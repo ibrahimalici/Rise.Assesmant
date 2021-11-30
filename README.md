@@ -7,10 +7,10 @@ Mikroservisler arasında ContactAPI - PreperaReport action ı üzerinden RabbitM
 Apigateway projesine OcelotForSwagger eklentisi eklenmiştir. (Eklenti henüz sağlıklı çalışmıyor)
 
 ContactAPI - swagger
-http://localhost:8080
+http://localhost:8080/swagger
 
 ReportAPI - swagger
-http://localhost:8081
+http://localhost:8081/swagger
 
 # Projede kullanılan teknolojiler
 .Net Core 
