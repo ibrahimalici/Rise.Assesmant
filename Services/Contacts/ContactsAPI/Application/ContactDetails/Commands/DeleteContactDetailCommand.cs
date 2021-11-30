@@ -17,11 +17,11 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
         public Guid ContactDetailId { get; set; }
     }
 
-    public class DeleteContactDetailHandle : IRequestHandler<DeleteContactDetailCommand, bool>
+    public class DeleteContactDetailHandler : IRequestHandler<DeleteContactDetailCommand, bool>
     {
         private readonly DatabaseContext db;
 
-        public DeleteContactDetailHandle(DatabaseContext db)
+        public DeleteContactDetailHandler(DatabaseContext db)
         {
             this.db = db;
         }

@@ -15,12 +15,12 @@ namespace ContactsAPI.Application.ReportsInfo.Queries
         
     }
 
-    public class GetAllReportHandle : IRequestHandler<GetAllReportQuery, List<ReportDTO>>
+    public class GetAllReportHandler : IRequestHandler<GetAllReportQuery, List<ReportDTO>>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
 
-        public GetAllReportHandle(DatabaseContext db, IMapper mapper)
+        public GetAllReportHandler(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;

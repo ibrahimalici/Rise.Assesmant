@@ -12,11 +12,11 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
         public Guid KisiId { get; set; }
     }
 
-    public class DeleteContactHandle : IRequestHandler<DeleteContactCommand, bool>
+    public class DeleteContactHandler : IRequestHandler<DeleteContactCommand, bool>
     {
         private readonly DatabaseContext db;
 
-        public DeleteContactHandle(DatabaseContext db)
+        public DeleteContactHandler(DatabaseContext db)
         {
             this.db = db;
         }

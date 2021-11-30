@@ -19,11 +19,11 @@ namespace ContactsAPI.Application.ContactSubDetails.Commands
         public Guid ContactId { get; set; }
     }
 
-    public class UpdateContactDetailHandle : IRequestHandler<UpdateContactDetailCommand,bool>
+    public class UpdateContactDetailHandler : IRequestHandler<UpdateContactDetailCommand,bool>
     {
         private readonly DatabaseContext db;
 
-        public UpdateContactDetailHandle(DatabaseContext db)
+        public UpdateContactDetailHandler(DatabaseContext db)
         {
             this.db = db;
         }

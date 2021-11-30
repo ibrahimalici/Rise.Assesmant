@@ -19,11 +19,11 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
         public string Company { get; set; }
     }
 
-    public class CreateContactHandle : IRequestHandler<CreateContactCommand, Guid>
+    public class CreateContactHandler : IRequestHandler<CreateContactCommand, Guid>
     {
         private readonly DatabaseContext db;
 
-        public CreateContactHandle(DatabaseContext db)
+        public CreateContactHandler(DatabaseContext db)
         {
             this.db = db;
         }

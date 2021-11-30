@@ -15,12 +15,12 @@ namespace ContactsAPI.Application.ContactSubDetails.Queries
         public Guid ContactDetailId { get; set; }
     }
 
-    public class GetContactDetailByIdHandle : IRequestHandler<GetContactDetailByIdQuery, ContactDetailDTO>
+    public class GetContactDetailByIdHandler : IRequestHandler<GetContactDetailByIdQuery, ContactDetailDTO>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
 
-        public GetContactDetailByIdHandle(DatabaseContext db, IMapper mapper)
+        public GetContactDetailByIdHandler(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;

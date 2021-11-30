@@ -20,11 +20,11 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
         public string Company { get; set; }
     }
 
-    public class UpdateKisiHandle : IRequestHandler<UpdateContactCommand, bool>
+    public class UpdateContactHandler : IRequestHandler<UpdateContactCommand, bool>
     {
         private readonly DatabaseContext db;
 
-        public UpdateKisiHandle(DatabaseContext db, IMapper mapper)
+        public UpdateContactHandler(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
         }

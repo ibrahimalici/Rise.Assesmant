@@ -6,11 +6,15 @@ namespace ContactsAPI.Persistance
 {
     public class DatabaseContext : DbContext
     {
-        private readonly IConfiguration Configuration;
-
-        public DatabaseContext(IConfiguration configuration)
+        public DatabaseContext()
         {
-            Configuration = configuration;
+
+        }
+
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options) 
+        {
+            
         }
 
         public DbSet<Contact> Contacts { get; set; }
@@ -18,8 +22,6 @@ namespace ContactsAPI.Persistance
         public DbSet<Report> Reports { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string cnn = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");
-            optionsBuilder.UseNpgsql(cnn);
             base.OnConfiguring(optionsBuilder);
         }
 

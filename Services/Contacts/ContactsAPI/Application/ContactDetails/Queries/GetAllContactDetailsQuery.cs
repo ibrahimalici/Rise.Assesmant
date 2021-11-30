@@ -20,12 +20,12 @@ namespace ContactsAPI.Application.ContactSubDetails.Queries
         public int RecordCount { get; set; }
     }
 
-    public class GetAllContactDetailHandle : IRequestHandler<GetAllContactDetailsQuery, List<ContactDetailDTO>>
+    public class GetAllContactDetailHandler : IRequestHandler<GetAllContactDetailsQuery, List<ContactDetailDTO>>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
 
-        public GetAllContactDetailHandle(DatabaseContext db, IMapper mapper)
+        public GetAllContactDetailHandler(DatabaseContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;

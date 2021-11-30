@@ -17,12 +17,12 @@ namespace ContactsAPI.Application.Reports.Commands
     {
     }
 
-    public class PrepareReportHandle : IRequestHandler<PrepareReportCommand, ReportDTO>
+    public class PrepareReportHandler : IRequestHandler<PrepareReportCommand, ReportDTO>
     {
         private readonly DatabaseContext db;
         private readonly IMapper mapper;
         private readonly IMassTransitHelper integration;
-        public PrepareReportHandle(DatabaseContext db, IMapper mapper, IMassTransitHelper massTransitHelper)
+        public PrepareReportHandler(DatabaseContext db, IMapper mapper, IMassTransitHelper massTransitHelper)
         {
             this.db = db;
             this.mapper = mapper;

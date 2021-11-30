@@ -29,11 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsAPI.Test", "TestPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsDetailsAPI.Test", "TestProjects\Controllers\ContactsDetailsAPI.Test\ContactsDetailsAPI.Test.csproj", "{AEBC1A70-8990-40E2-8870-F8AE8D226DE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsAPI.Test", "TestProjects\Controllers\ReportsAPI.Test\ReportsAPI.Test.csproj", "{E9A2E988-F28C-4878-A047-F3C167A6A47D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportsAPI.Test", "TestProjects\Controllers\ReportsAPI.Test\ReportsAPI.Test.csproj", "{E9A2E988-F28C-4878-A047-F3C167A6A47D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MediatorRequestHandlers", "MediatorRequestHandlers", "{C7E20B4E-3AAE-4048-B791-F4AC3DDC6B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateContactDetailHandler.Test", "TestProjects\MediatorRequestHandlers\CreateContactDetailHandler.Test\CreateContactDetailHandler.Test.csproj", "{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mediator.Design.CRUD.Test", "TestProjects\MediatorRequestHandlers\CreateContactDetailHandler.Test\Mediator.Design.CRUD.Test.csproj", "{B06CEDC6-FE78-4B89-98D0-EB8EAC9DA8D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
