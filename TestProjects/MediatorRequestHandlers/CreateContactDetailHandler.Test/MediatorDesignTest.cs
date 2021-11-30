@@ -17,7 +17,11 @@ namespace MediatorDesign.CRUD.Test
     {
         private Mock<IConfiguration> _mock;
         private CreateContactDetailHandler createContactDetailHandler;
-        private CreateContactHandler createContactHandle;
+        private CreateContactHandler createContactHandler;
+        private UpdateContactHandler updateContactHandler;
+        private UpdateContactDetailHandler updateContactDetailHandler;
+        private DeleteContactHandler deleteContactHandler;
+        private DeleteContactDetailHandler deleteContactDetailHandler;
         private DatabaseContext db;
         private readonly SqliteConnection connection;
         public MediatorDesignTest()
@@ -28,9 +32,13 @@ namespace MediatorDesign.CRUD.Test
             connection.Open();
             var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlite(connection).Options;
             db = new DatabaseContext(options);
+            db.Database.EnsureDeleted();
+            db.Database.EnsureCreated();
         }
 
         #region .EF Crud Test
+
+        #region .AddNew
         [Fact]
         public async void ContactAndContactDetail_AddNew_IsSuccessfully()
         {
@@ -38,7 +46,9 @@ namespace MediatorDesign.CRUD.Test
 
             Assert.True(result);
         }
+        #endregion
 
+        #region .Update Datas
         [Fact]
         public async Task ContactAndContactDetail_UpdateDatas_IsSuccessfully()
         {
@@ -54,7 +64,9 @@ namespace MediatorDesign.CRUD.Test
 
             Assert.IsType<int>(result);
         }
+        #endregion
 
+        #region .Delete Datas
         public async Task ContactAndContactDetail_DeleteDatas_IsSuccessfully()
         {
             await AddData();
@@ -70,21 +82,30 @@ namespace MediatorDesign.CRUD.Test
         }
         #endregion
 
+        #endregion
+
+        #region .Mediator Test
+
+        #region .CreateContactHandler
         [Theory]
         [InlineData("Metin", "aaa", "")]
         [InlineData("Ali", "bbb", "")]
         [InlineData("Feyyaz", "ccc", "")]
-        public void CreateContactHandler_HandleAction_IsSuccessfully(string Name, string Surename, string Company)
+        public async void CreateContactHandler_HandlerAction_IsSuccessfully(string Name, string Surename, string Company)
         {
-            createContactHandle = new CreateContactHandler(db);
-            var result = createContactHandle.Handle(new CreateContactCommand
+            createContactHandler = new CreateContactHandler(db);
+            var result = await createContactHandler.Handle(new CreateContactCommand
             {
                 Company = Company,
                 Name = Name,
                 Surename = Surename
             }, new System.Threading.CancellationToken());
-        }
 
+            Assert.IsType<Guid>(result);
+        }
+        #endregion
+
+        #region .CreateContactDetailHandler
         [Theory]
         [InlineData(1, "05371654987")]
         [InlineData(2, "asda@com.tr")]
@@ -96,22 +117,93 @@ namespace MediatorDesign.CRUD.Test
             Guid ContactId = firstContact.ContactId;
 
             createContactDetailHandler = new CreateContactDetailHandler(db);
-            var result = createContactDetailHandler.Handle(new CreateContactDetailCommand
+            var result = await createContactDetailHandler.Handle(new CreateContactDetailCommand
             {
                 ContactDetailType = (SharedLibrary.Domains.ContactDetailType)ContactDetailType,
                 ContactId = ContactId,
                 Description = Description
             }, new System.Threading.CancellationToken());
 
-            Assert.IsType<Guid>(result.Result);
+            Assert.IsType<Guid>(result);
         }
+        #endregion
+
+        #region .UpdateContactHandler
+        public async void UpdateContactHandler_HandlerAction_IsSuccessfully()
+        {
+            await AddData();
+            var firstContact = await db.Contacts.FirstOrDefaultAsync();
+
+            updateContactHandler = new UpdateContactHandler(db);
+            var result = await updateContactHandler.Handle(new UpdateContactCommand
+            {
+                ContactId = firstContact.ContactId,
+                Company = "Deneme A.Þ.",
+                Name = firstContact.Name,
+                Surename = firstContact.Surename
+            }, new System.Threading.CancellationToken());
+
+            Assert.True(result);
+        }
+        #endregion
+
+        #region .UpdateContactDetailHandler
+        public async void UpdateContactDetailHandler_HandlerAction_IsSuccessfully()
+        {
+            await AddData();
+            var firstContact = await db.ContactDetails.FirstOrDefaultAsync();
+
+            updateContactDetailHandler = new UpdateContactDetailHandler(db);
+            var result = await updateContactDetailHandler.Handle(new UpdateContactDetailCommand
+            {
+                ContactId= firstContact.ContactId,
+                ContactDetailId = firstContact.ContactDetailId,
+                ContactDetailType = SharedLibrary.Domains.ContactDetailType.Location,
+                Description = "GAZÝANTEP"
+            }, new System.Threading.CancellationToken());
+
+            Assert.True(result);
+        }
+        #endregion
+
+        #region .DeleteContactHandler
+        public async void DeleteContactHandler_HandlerAction_IsSuccessfully()
+        {
+            await AddData();
+            var firstContact = await db.Contacts.FirstOrDefaultAsync();
+
+            deleteContactHandler = new DeleteContactHandler(db);
+            var result = await deleteContactHandler.Handle(new DeleteContactCommand
+            {
+                ContactId = firstContact.ContactId,
+            }, new System.Threading.CancellationToken());
+
+            Assert.True(result);
+        }
+        #endregion
+
+        #region .DeleteContactDetailHandler
+        public async void DeleteContactDetailHandler_HandlerAction_IsSuccessfully()
+        {
+            await AddData();
+            var firstContact = await db.ContactDetails.FirstOrDefaultAsync();
+
+            deleteContactDetailHandler = new DeleteContactDetailHandler(db);
+            var result = await deleteContactDetailHandler.Handle(new DeleteContactDetailCommand
+            {
+                ContactDetailId = firstContact.ContactDetailId,
+            }, new System.Threading.CancellationToken());
+
+            Assert.True(result);
+        }
+        #endregion
+
+        #endregion
+
 
         #region AddData
         public async Task<bool> AddData()
         {
-            await db.Database.EnsureDeletedAsync();
-            await db.Database.EnsureCreatedAsync();
-
             Guid g = Guid.Parse("efe6b3b6-18e3-4003-964a-48e5745aac3f");
             await db.Contacts.AddAsync(new ContactsAPI.Entities.Contact
             {

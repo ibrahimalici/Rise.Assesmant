@@ -24,7 +24,7 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
     {
         private readonly DatabaseContext db;
 
-        public UpdateContactHandler(DatabaseContext db, IMapper mapper)
+        public UpdateContactHandler(DatabaseContext db)
         {
             this.db = db;
         }

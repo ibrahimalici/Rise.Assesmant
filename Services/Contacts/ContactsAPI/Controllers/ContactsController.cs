@@ -54,7 +54,7 @@ namespace ContactsAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
-            bool result = await mediator.Send(new DeleteContactCommand { KisiId = id });
+            bool result = await mediator.Send(new DeleteContactCommand { ContactId = id });
             return Ok(result);
         }
 

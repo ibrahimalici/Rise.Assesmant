@@ -9,7 +9,7 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
 {
     public class DeleteContactCommand : IRequest<bool>
     {
-        public Guid KisiId { get; set; }
+        public Guid ContactId { get; set; }
     }
 
     public class DeleteContactHandler : IRequestHandler<DeleteContactCommand, bool>
@@ -23,7 +23,7 @@ namespace ContactsAPI.Application.ContactsInfo.Commands
 
         public async Task<bool> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
         {
-            Contact saved = await db.Contacts.FindAsync(request.KisiId);
+            Contact saved = await db.Contacts.FindAsync(request.ContactId);
             db.Contacts.Remove(saved);
             await db.SaveChangesAsync();
             return true;
